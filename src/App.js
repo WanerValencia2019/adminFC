@@ -11,7 +11,7 @@ import { focusHandling } from 'cruip-js-toolkit';
 import './charts/ChartjsConfig';
 
 // Import pages
-import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
 
 function App() {
 
@@ -28,10 +28,10 @@ function App() {
     <>
       <Switch>
         <Route exact path="/">
-          <Dashboard />
+          <Home />
         </Route>
         <Route exact path="/users">
-          <Dashboard />
+          <Home />
         </Route>
       </Switch>
     </>
