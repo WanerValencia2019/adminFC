@@ -100,14 +100,13 @@ function Sidebar({
               </NavLink>
             </li>
             {/* Customers */}
-            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === 'customers' && 'bg-gray-900'}`}>
-              <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'customers' && 'hover:text-gray-200'}`}>
+            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === 'users' && 'bg-gray-900'}`}>
+              <NavLink exact to="/users" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'users' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <svg className="flex-shrink-0 h-6 w-6 mr-3" viewBox="0 0 24 24">
-                    <path className={`fill-current text-gray-400 ${page === 'customers' && 'text-indigo-300'}`} d="M7 0l6 7H8v10H6V7H1z" />
-                    <path className={`fill-current text-gray-600 ${page === 'customers' && 'text-indigo-500'}`} d="M18 7v10h5l-6 7-6-7h5V7z" />
+                    <path className={`fill-current text-gray-400 ${page === 'users' && 'text-indigo-500'}`} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />                    
                   </svg>
-                  <span className="text-sm font-medium">Customers</span>
+                  <span className="text-sm font-medium">Usuarios</span>
                 </div>
               </NavLink>
             </li>

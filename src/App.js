@@ -12,6 +12,7 @@ import './charts/ChartjsConfig';
 
 // Import pages
 import Home from './pages/Home';
+import Users from './pages/Users';
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/users">
-          <Home />
+          <Users />
         </Route>
       </Switch>
     </>
