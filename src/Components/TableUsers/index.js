@@ -12,13 +12,17 @@ import Modal from "./../Modal";
 import "./styles.css";
 import UserForm from "../UserForm";
 
-function TableUsers({data}) {
+function TableUsers({data, userContext}) {
   const [showModal, setShowModal] = useState(false);
 
   const [form, setForm] = useState(null);
 
+  const handleSubmit = (name, lastName, email, descrption) => {
+    userContext.addUser(name, lastName, email, descrption);
+  };
+
   const renderEditModal = (user) => (
-    <UserForm data={user} cancel={() => setShowModal(false)} />
+    <UserForm data={user} cancel={() => setShowModal(false)} confirm={handleSubmit} />
   );
   const renderDeleteModal = (data) => (
     <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -71,7 +75,7 @@ function TableUsers({data}) {
     setShowModal((prev) => !prev);
   };
   const handleCreate = () => {
-    setForm(<UserForm cancel={() => setShowModal(false)} />);
+    setForm(<UserForm cancel={() => setShowModal(false)}  confirm={handleSubmit} />);
     setShowModal((prev) => !prev);
   }
 

@@ -8,8 +8,8 @@ export default function Modal({show, closeModal, children}) {
 
   return (
     <Transition.Root  show={show} as={Fragment}>
-      <Dialog as="div" className="fixed inset-0 bg-gray-900 bg-opacity-30 z-50 transition-opacity" initialFocus={cancelButtonRef} onClose={closeModal} >
-        <div className="flex justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <Dialog as="div" className="fixed overflow-scroll inset-0 bg-gray-900 bg-opacity-30 z-50 transition-opacity overflow-scroll" initialFocus={cancelButtonRef} onClose={closeModal} >
+        <div className="flex justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 overflow-scroll">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

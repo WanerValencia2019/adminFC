@@ -1,11 +1,20 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-export default function UserForm({ data, cancel }) {
-  const [username, setUsername] = useState("");
-  const [emal, setEmail] = useState("");
+export default function UserForm({ data, cancel, confirm}) {
+  const [name, setName] = useState(data?.name || "");
+  const [email, setEmail] = useState(data?.email || "");
+  const [lastName, setLastName] = useState(data?.lastName || "");
+  const [description, setDescription] = useState(data?.description || "");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    confirm(name, lastName, email , description);
+    cancel();   
+  };
+
   return (
-    <div className="mt-10 sm:mt-0">
-      <div className="md:grid  md:gap-6">
+    <div className="mt-10 sm:mt-0 ">
+      <div className="md:grid  md:gap-6 ">
         <div className="mt-5 md:mt-0 md:col-span-2">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
@@ -17,7 +26,7 @@ export default function UserForm({ data, cancel }) {
               </p>
             </div>
           </div>
-          <form action="#" method="POST">
+          <form onSubmit={handleSubmit}>
             <div className="shadow overflow-hidden sm:rounded-md">
               <div className="px-4 py-5 bg-white sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
@@ -34,7 +43,8 @@ export default function UserForm({ data, cancel }) {
                       id="first-name"
                       autoComplete="given-name"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      value={data?.name || ""}
+                      value={name}
+                      onChange={(e)=>setName(e.target.value)}
                     />
                   </div>
 
@@ -51,10 +61,27 @@ export default function UserForm({ data, cancel }) {
                       id="last-name"
                       autoComplete="family-name"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      value={data?.name || ""}
+                      value={lastName}
+                      onChange={(e)=>setLastName(e.target.value)}
                     />
                   </div>
-
+                  <div className="col-span-6 sm:col-span-4">
+                    <label
+                      htmlFor="email-address"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Description
+                    </label>
+                    <textarea
+                      type="text"
+                      name="description"
+                      id="description"
+                      autoComplete="description"
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      value={description}
+                      onChange={(e)=>setDescription(e.target.value)}
+                    />
+                  </div>
                   <div className="col-span-6 sm:col-span-4">
                     <label
                       htmlFor="email-address"
@@ -68,7 +95,8 @@ export default function UserForm({ data, cancel }) {
                       id="email-address"
                       autoComplete="email"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      value={data?.email || ""}
+                      value={email}
+                      onChange={(e)=>setEmail(e.target.value)}
                     />
                   </div>
 
@@ -85,6 +113,7 @@ export default function UserForm({ data, cancel }) {
                       autoComplete="country"
                       className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     >
+                      <option>Chile</option>
                       <option>United States</option>
                       <option>Canada</option>
                       <option>Mexico</option>

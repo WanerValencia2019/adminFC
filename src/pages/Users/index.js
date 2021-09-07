@@ -26,8 +26,7 @@ function Users() {
       <div className="col-span-full xl:col-span-6 bg-white shadow-lg rounded-sm border border-gray-200">
         <Search placeholder="Buscar por usuario" data = {initial} setData ={setInital} initialData={users.users} />
       </div>
-      <TableUsers  data={initial} />
-      
+      <TableUsers  data={initial} userContext={users} />      
     </DashBoard>
   );
 }
