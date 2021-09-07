@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Dialog } from '@headlessui/react'
 
-import Image01 from "../../images/user-36-05.jpg";
-import Image02 from "../../images/user-36-06.jpg";
-import Image03 from "../../images/user-36-07.jpg";
-import Image04 from "../../images/user-36-08.jpg";
-import Image05 from "../../images/user-36-09.jpg";
+
 
 import Pagination from "../Pagination";
 import { TrashIcon, PencilAltIcon } from "@heroicons/react/outline";
@@ -16,52 +12,11 @@ import Modal from "./../Modal";
 import "./styles.css";
 import UserForm from "../UserForm";
 
-function TableUsers() {
+function TableUsers({data}) {
   const [showModal, setShowModal] = useState(false);
 
   const [form, setForm] = useState(null);
-  const customers = [
-    {
-      id: "0",
-      image: Image01,
-      name: "Alex Shatov",
-      email: "alexshatov@gmail.com",
-      location: "🇺🇸",
-      spent: "$2,890.66",
-    },
-    {
-      id: "1",
-      image: Image02,
-      name: "Philip Harbach",
-      email: "philip.h@gmail.com",
-      location: "🇩🇪",
-      spent: "$2,767.04",
-    },
-    {
-      id: "2",
-      image: Image03,
-      name: "Mirko Fisuk",
-      email: "mirkofisuk@gmail.com",
-      location: "🇫🇷",
-      spent: "$2,996.00",
-    },
-    {
-      id: "3",
-      image: Image04,
-      name: "Olga Semklo",
-      email: "olga.s@cool.design",
-      location: "🇮🇹",
-      spent: "$1,220.66",
-    },
-    {
-      id: "4",
-      image: Image05,
-      name: "Burak Long",
-      email: "longburak@gmail.com",
-      location: "🇬🇧",
-      spent: "$1,890.66",
-    },
-  ];
+
   const renderEditModal = (user) => (
     <UserForm data={user} cancel={() => setShowModal(false)} />
   );
@@ -116,7 +71,7 @@ function TableUsers() {
     setShowModal((prev) => !prev);
   };
   const handleCreate = () => {
-    setForm(<UserForm />);
+    setForm(<UserForm cancel={() => setShowModal(false)} />);
     setShowModal((prev) => !prev);
   }
 
@@ -128,7 +83,7 @@ function TableUsers() {
           <PlusCircleIcon
             onClick={() => handleCreate()}
             class="h-10 w-10 text-blue-500 cursor-pointer"
-          />
+          />          
         </div>
       </header>
       <div className="p-3">
@@ -164,25 +119,25 @@ function TableUsers() {
             </thead>
             {/* Table body */}
             <tbody className="text-sm divide-y divide-gray-100">
-              {customers.map((customer) => {
+              {data && data.map((customer) => {
                 return (
                   <tr key={customer.id}>
                     <td
-                      onClick={() => alert("HOLA SR" + customer.name)}
+                      onClick={() => handleEdit(customer)}
                       className="p-2 user whitespace-nowrap"
                     >
                       <div className="flex items-center">
                         <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
                           <img
                             className="rounded-full"
-                            src={customer.image}
+                            src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=128"
                             width="40"
                             height="40"
                             alt={customer.name}
                           />
                         </div>
                         <div className="font-medium  text-green-500">
-                          {customer.name}
+                          {customer.username}
                         </div>
                       </div>
                     </td>
@@ -191,7 +146,7 @@ function TableUsers() {
                     </td>
                     <td className="p-2 whitespace-nowrap">
                       <div className="text-left font-medium ">
-                        {customer.name}
+                        {customer.lastName}
                       </div>
                     </td>
                     <td className="p-2 whitespace-nowrap">
@@ -201,7 +156,7 @@ function TableUsers() {
                     </td>
                     <td className="p-2 whitespace-nowrap">
                       <div className="font-medium text-gray-800">
-                        {new Date().toDateString()}
+                        {customer.createdAt}
                       </div>
                     </td>
                     <td className="p-1 whitespace-nowrap">
@@ -221,6 +176,7 @@ function TableUsers() {
               })}
             </tbody>
           </table>
+          {!data && <h4 className="text-center p-3">No hay usuarios disponibles</h4>}
           <Modal show={showModal} closeModal={() => setShowModal(false)}>
             {form}
           </Modal>

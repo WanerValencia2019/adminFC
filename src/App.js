@@ -14,6 +14,8 @@ import './charts/ChartjsConfig';
 import Home from './pages/Home';
 import Users from './pages/Users';
 
+import UserProvider from './context/users/UserProvider';
+
 function App() {
 
   const location = useLocation();
@@ -32,7 +34,9 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/users">
-          <Users />
+          <UserProvider>
+            <Users />
+          </UserProvider>
         </Route>
       </Switch>
     </>

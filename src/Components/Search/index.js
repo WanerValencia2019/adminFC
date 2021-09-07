@@ -1,7 +1,16 @@
-import React, {useRef} from "react";
+import React, {useState, useEffect} from "react";
 
-export default function Search() {
-  const searchInput = useRef(null);
+export default function Search({initialData, data, setData, placeholder}) {
+  const [search, setSearch] = useState("")
+
+  const filterData = async (text) => {
+    setSearch(text);  
+    await setData((prev)=>prev.filter((u)=>u.username.toLowerCase().includes(search.toLowerCase())));
+  }
+  useEffect(() => {
+    if(search.length === 0) setData(initialData);
+  }, [initialData, search, setData])
+
   return (
     <div>
       <div className="relative">
@@ -12,8 +21,9 @@ export default function Search() {
           id="modal-search"
           className="w-full border-0 focus:ring-transparent placeholder-gray-400 appearance-none py-3 pl-10 pr-4"
           type="search"
-          placeholder="Buscar"
-          ref={searchInput}
+          placeholder={placeholder || "Buscar"}
+          value = {search}
+          onChange = {(e)=> filterData(e.target.value)}
         />
         <button
           className="absolute inset-0 right-auto group"
