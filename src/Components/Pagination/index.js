@@ -19,9 +19,10 @@ export default function Pagination() {
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </NavLink>
 
-            {[1, 2, 3, 4].map((value) => {
+            {[1, 2, 3, 4].map((value,i) => {
               return (
                 <NavLink
+                  key={value} 
                   to={"/users/"+value}
                   //aria-current="page"
                   className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50  md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"

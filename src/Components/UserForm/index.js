@@ -8,7 +8,8 @@ export default function UserForm({ data, cancel, confirm}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    confirm(name, lastName, email , description);
+    let id = data?.id || 0;
+    confirm(id,name, lastName, email, description);
     cancel();   
   };
 

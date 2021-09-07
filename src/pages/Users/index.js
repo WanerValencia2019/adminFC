@@ -8,13 +8,13 @@ import Search from "../../Components/Search";
 import TableUsers from "../../Components/TableUsers";
 
 import { UserContext } from "../../context/users/UserContext";
+import { useSelector } from "react-redux";
+
 
 function Users() {
-  
   const users = useContext(UserContext);
-  const [initial, setInital] = useState(users.users);
-
-
+  const userState = useSelector((state)=>state.user);
+  const [initial, setInital] = useState(userState.users);
 
   return (
     <DashBoard>
@@ -24,7 +24,7 @@ function Users() {
         </h1>
       </WelcomeBanner>
       <div className="col-span-full xl:col-span-6 bg-white shadow-lg rounded-sm border border-gray-200">
-        <Search placeholder="Buscar por usuario" data = {initial} setData ={setInital} initialData={users.users} />
+        <Search placeholder="Buscar por usuario" data = {initial} setData ={setInital} initialData={userState.users} />
       </div>
       <TableUsers  data={initial} userContext={users} />      
     </DashBoard>
