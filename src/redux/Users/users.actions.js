@@ -27,7 +27,6 @@ export const addUser =
 
   export const deleteUser = (idUser) => (dispatch, prevState) => {
     let users = prevState().user.users.filter((user)=>user.id !== idUser);   
-
       return dispatch({
           type: ActionTypes.DELETE_USER_SUCCESS,
           payload: {

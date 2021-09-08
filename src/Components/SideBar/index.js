@@ -11,6 +11,7 @@ function Sidebar({
   const page = pathname.split('/')[1];
 
   const [showServices, setShowServices] = useState(false);
+  const [showUserOptions, setShowUserOptions] = useState(false);
 
   const trigger = useRef(null);
   const sidebar = useRef(null);
@@ -102,16 +103,43 @@ function Sidebar({
                 </div>
               </NavLink>
             </li>
-            {/* Customers */}
-            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === 'users' && 'bg-gray-900'}`}>
-              <NavLink exact to="/users" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'users' && 'hover:text-gray-200'}`}>
-                <div className="flex flex-grow">
-                  <svg className="flex-shrink-0 h-6 w-6 mr-3" viewBox="0 0 24 24">
-                    <path className={`fill-current text-gray-400 ${page === 'users' && 'text-indigo-500'}`} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />                    
-                  </svg>
-                  <span className="text-sm font-medium">Usuarios</span>
+
+            {/* Users */}
+            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page.startsWith('users') && 'bg-gray-900'}`}>
+              <div onClick={()=>setShowUserOptions(true)}  className={`block cursor-pointer text-gray-200 hover:text-white transition duration-150 ${page.startsWith('services') && 'hover:text-gray-200'}`}>
+                <div className="flex items-center justify-between">
+                  <div className="flex flex-grow">
+                    <svg className="flex-shrink-0 h-6 w-6 mr-3" viewBox="0 0 24 24">
+                      <path className={`fill-current text-gray-600 ${page.startsWith('users') && 'text-indigo-500'}`} d="M18.974 8H22a2 2 0 012 2v6h-2v5a1 1 0 01-1 1h-2a1 1 0 01-1-1v-5h-2v-6a2 2 0 012-2h.974zM20 7a2 2 0 11-.001-3.999A2 2 0 0120 7zM2.974 8H6a2 2 0 012 2v6H6v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5H0v-6a2 2 0 012-2h.974zM4 7a2 2 0 11-.001-3.999A2 2 0 014 7z" />
+                      <path className={`fill-current text-gray-400 ${page.startsWith('users') && 'text-indigo-300'}`} d="M12 6a3 3 0 110-6 3 3 0 010 6zm2 18h-4a1 1 0 01-1-1v-6H6v-6a3 3 0 013-3h6a3 3 0 013 3v6h-3v6a1 1 0 01-1 1z" />
+                    </svg>
+                    <span className="text-sm font-medium">Usuarios</span>
+                  </div>
+                  {/* Icon */}
+                  <div className="flex flex-shrink-0 ml-2">
+                    <svg className={`w-3 h-3 flex-shrink-0 ml-1 fill-current text-gray-400 ${page.startsWith('team-') && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                      <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                    </svg>
+                  </div>
                 </div>
-              </NavLink>
+              </div>
+              <ul className={`pl-9 mt-1 p-3  ${!showUserOptions && 'hidden'}`}>
+                <li className="mb-1 last:mb-0 hover:bg-gray-900">
+                  <NavLink onClick={()=>setShowUserOptions(true)} exact to="/users" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'team-tabs' && 'text-indigo-400 hover:text-indigo-400'}`}>
+                    <span className="text-sm font-medium">Listado de usuarios</span>
+                  </NavLink>
+                </li>
+                <li className="mb-1 last:mb-0 hover:bg-gray-900">
+                  <NavLink onClick={()=>setShowUserOptions(true)} exact to="/"  className={`block text-gray-200  hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
+                    <span className="text-sm font-medium">Roles</span>
+                  </NavLink>
+                </li>
+                <li className="mb-1 last:mb-0 hover:bg-gray-900 ">
+                  <NavLink onClick={()=>setShowUserOptions(true)} exact to="/"  className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
+                    <span className="text-sm font-medium">Permisos</span>
+                  </NavLink>
+                </li>
+              </ul>
             </li>
             {/* Orders */}
             <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === 'orders' && 'bg-gray-900'}`}>
@@ -144,7 +172,7 @@ function Sidebar({
                 </div>
               </NavLink>
             </li>
-            {/* Team */}
+            {/* Services */}
             <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page.startsWith('services') && 'bg-gray-900'}`}>
               <div onClick={()=>setShowServices((prev)=>!prev)}  className={`block cursor-pointer text-gray-200 hover:text-white transition duration-150 ${page.startsWith('services') && 'hover:text-gray-200'}`}>
                 <div className="flex items-center justify-between">

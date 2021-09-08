@@ -11,6 +11,7 @@ import { UserContext } from "../../context/users/UserContext";
 import { useSelector } from "react-redux";
 
 
+
 function Users() {
   const users = useContext(UserContext);
   const userState = useSelector((state)=>state.user);
@@ -19,7 +20,7 @@ function Users() {
   return (
     <DashBoard>
       <WelcomeBanner>
-        <h1 className="text-2xl md:text-3xl text-gray-800 font-bold mb-1">
+        <h1 className="text-2xl  md:text-3xl text-gray-800 font-bold mb-1">
           Usuarios 👋
         </h1>
       </WelcomeBanner>
