@@ -5,7 +5,7 @@ import WelcomeBanner from "./../../Components/WelcomeBanner/index";
 import Search from "../../Components/Search";
 
 
-import TableUsers from "../../Components/TableUsers";
+import TableUsers from "./TableUsers";
 
 
 import { useSelector } from "react-redux";

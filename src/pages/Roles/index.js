@@ -7,9 +7,6 @@ import Search from "../../Components/Search";
 
 
 import TableRoles from "./TableRoles";
-
-
-
 import {  roles } from './../../redux/selectors';
 
 

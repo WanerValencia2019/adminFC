@@ -67,7 +67,7 @@ function TableUsers({ data }) {
           <h2 className="font-semibold text-gray-800 ">Roles</h2>
           <PlusCircleIcon
             onClick={() => handleCreate()}
-            class="h-10 w-10 text-blue-500 cursor-pointer"
+            className="h-10 w-10 text-blue-500 cursor-pointer"
           />
         </div>
       </header>
