@@ -8,6 +8,9 @@ const types = {
 
     //roles module
     LOAD_ROLES: 'LOAD_ROLES',
+    ADD_ROLE_SUCCESS:'ADD_ROLE_SUCCESS',
+    DELETE_ROLE_SUCCESS: 'DELETE_ROLE_SUCCESS',
+    UPDATE_ROLE_SUCCESS: 'UPDATE_ROLE_SUCCESS',
 
 
     //search component

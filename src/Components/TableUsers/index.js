@@ -17,7 +17,7 @@ import {
 } from "./../../redux/Users/users.actions";
 import { useDispatch } from "react-redux";
 
-function TableUsers({ data, userContext }) {
+function TableUsers({ data }) {
   const [showModal, setShowModal] = useState(false);
 
   const dispatch = useDispatch();

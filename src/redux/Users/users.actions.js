@@ -1,10 +1,9 @@
 import ActionTypes from "./../actionTypes";
 
-const getUser = (id) => id;
 
 export const addUser =
   (id=0,name, lastName, email, description) => (dispatch, prevState) => {
-    let count = prevState().user.users.length
+    let count = prevState().listUsers.users.length
     return dispatch({
       type: ActionTypes.ADD_USER_SUCCESS,
       payload: {
@@ -26,7 +25,7 @@ export const addUser =
   };
 
   export const deleteUser = (idUser) => (dispatch, prevState) => {
-    let users = prevState().user.users.filter((user)=>user.id !== idUser);   
+    let users = prevState().listUsers.users.filter((user)=>user.id !== idUser);   
       return dispatch({
           type: ActionTypes.DELETE_USER_SUCCESS,
           payload: {
@@ -42,8 +41,8 @@ export const addUser =
       description: description,
       email: email,
     }
-    let index = prevState().user.users.findIndex((u)=>u.id===id);
-    let users = prevState().user.users;
+    let index = prevState().listUsers.users.findIndex((u)=>u.id===id);
+    let users = prevState().listUsers.users;
     
     users[index] ={...users[index], ...newData};
 

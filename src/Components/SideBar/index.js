@@ -106,7 +106,7 @@ function Sidebar({
 
             {/* Users */}
             <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page.startsWith('users') && 'bg-gray-900'}`}>
-              <div onClick={()=>setShowUserOptions(true)}  className={`block cursor-pointer text-gray-200 hover:text-white transition duration-150 ${page.startsWith('services') && 'hover:text-gray-200'}`}>
+              <div onClick={()=>setShowUserOptions((prev)=>!prev)}   className={`block cursor-pointer text-gray-200 hover:text-white transition duration-150 ${page.startsWith('users') && 'hover:text-gray-200'}`}>
                 <div className="flex items-center justify-between">
                   <div className="flex flex-grow">
                     <svg className="flex-shrink-0 h-6 w-6 mr-3" viewBox="0 0 24 24">
@@ -117,25 +117,25 @@ function Sidebar({
                   </div>
                   {/* Icon */}
                   <div className="flex flex-shrink-0 ml-2">
-                    <svg className={`w-3 h-3 flex-shrink-0 ml-1 fill-current text-gray-400 ${page.startsWith('team-') && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                    <svg className={`w-3 h-3 flex-shrink-0 ml-1 fill-current text-gray-400 ${page.startsWith('users') && 'transform rotate-180'}`} viewBox="0 0 12 12">
                       <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
                     </svg>
                   </div>
                 </div>
               </div>
-              <ul className={`pl-9 mt-1 p-3  ${!showUserOptions && 'hidden'}`}>
+              <ul className={`pl-9 mt-1 p-3  ${(!showUserOptions && !page.startsWith('users')) && 'hidden'}`}>
                 <li className="mb-1 last:mb-0 hover:bg-gray-900">
-                  <NavLink onClick={()=>setShowUserOptions(true)} exact to="/users" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'team-tabs' && 'text-indigo-400 hover:text-indigo-400'}`}>
+                  <NavLink onClick={()=>setShowUserOptions(true)} exact to="/users" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'users' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Listado de usuarios</span>
                   </NavLink>
                 </li>
                 <li className="mb-1 last:mb-0 hover:bg-gray-900">
-                  <NavLink onClick={()=>setShowUserOptions(true)} exact to="/"  className={`block text-gray-200  hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
+                  <NavLink onClick={()=>setShowUserOptions(true)} exact to="/users-roles"  className={`block text-gray-200  hover:text-white transition duration-150" ${page === 'users-roles' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Roles</span>
                   </NavLink>
                 </li>
                 <li className="mb-1 last:mb-0 hover:bg-gray-900 ">
-                  <NavLink onClick={()=>setShowUserOptions(true)} exact to="/"  className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
+                  <NavLink onClick={()=>setShowUserOptions(true)} exact to="/users"  className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Permisos</span>
                   </NavLink>
                 </li>

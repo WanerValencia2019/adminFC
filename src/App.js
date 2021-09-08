@@ -13,6 +13,7 @@ import './charts/ChartjsConfig';
 // Import pages
 import Home from './pages/Home';
 import Users from './pages/Users';
+import Roles from './pages/Roles';
 
 import UserProvider from './context/users/UserProvider';
 
@@ -38,6 +39,9 @@ function App() {
           <UserProvider>
             <Users />
           </UserProvider>
+        </Route>
+        <Route exact path="/users-roles">
+            <Roles />
         </Route>
       </Switch>
     </>
