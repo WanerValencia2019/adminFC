@@ -14,8 +14,9 @@ import './charts/ChartjsConfig';
 import Home from './pages/Home';
 import Users from './pages/Users';
 import Roles from './pages/Roles';
+import Interests from './pages/Interests';
 
-import UserProvider from './context/users/UserProvider';
+
 
 
 function App() {
@@ -36,12 +37,13 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/users">
-          <UserProvider>
-            <Users />
-          </UserProvider>
+            <Users />          
         </Route>
         <Route exact path="/users-roles">
             <Roles />
+        </Route>
+        <Route exact path="/interests">
+            <Interests />
         </Route>
       </Switch>
     </>

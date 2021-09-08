@@ -142,14 +142,14 @@ function Sidebar({
               </ul>
             </li>
             {/* Orders */}
-            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === 'orders' && 'bg-gray-900'}`}>
-              <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'orders' && 'hover:text-gray-200'}`}>
+            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === 'interests' && 'bg-gray-900'}`}>
+              <NavLink exact to="/interests" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'orders' && 'hover:text-gray-200'}`}>
                 <div className="flex items-center justify-between">
                   <div className="flex flex-grow">
                     <svg className="flex-shrink-0 h-6 w-6 mr-3" viewBox="0 0 24 24">
-                      <path className={`fill-current text-gray-400 ${page === 'orders' && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
-                      <path className={`fill-current text-gray-700 ${page === 'orders' && 'text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
-                      <path className={`fill-current text-gray-600 ${page === 'orders' && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
+                      <path className={`fill-current text-gray-400 ${page === 'interests' && 'text-indigo-300'}`} d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z" />
+                      <path className={`fill-current text-gray-700 ${page === 'interests' && 'text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
+                      <path className={`fill-current text-gray-600 ${page === 'interests' && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
                     </svg>
                     <span className="text-sm font-medium">Intereses</span>
                   </div>
@@ -194,12 +194,17 @@ function Sidebar({
               <ul className={`pl-9 mt-1 ${!showServices && 'hidden'}`}>
                 <li className="mb-1 last:mb-0">
                   <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'team-tabs' && 'text-indigo-400 hover:text-indigo-400'}`}>
-                    <span className="text-sm font-medium">Servicio #1</span>
+                    <span className="text-sm font-medium">Listar servicios</span>
                   </NavLink>
                 </li>
                 <li className="mb-1 last:mb-0">
                   <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
-                    <span className="text-sm font-medium">Servicio #2</span>
+                    <span className="text-sm font-medium">Estados</span>
+                  </NavLink>
+                </li>
+                  <li className="mb-1 last:mb-0">
+                  <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
+                    <span className="text-sm font-medium">Usuarios</span>
                   </NavLink>
                 </li>
               </ul>
