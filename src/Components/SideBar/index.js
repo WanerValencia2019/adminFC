@@ -123,18 +123,18 @@ function Sidebar({
                   </div>
                 </div>
               </div>
-              <ul className={`pl-9 mt-1 p-3  ${(!showUserOptions && !page.startsWith('users')) && 'hidden'}`}>
-                <li className="mb-1 last:mb-0 hover:bg-gray-900">
+              <ul className={`pl-9  p-1  ${(!showUserOptions && !page.startsWith('users')) && 'hidden'}`}>
+                <li className="mb-1 last:mb-0 hover:bg-gray-900 p-2">
                   <NavLink onClick={()=>setShowUserOptions(true)} exact to="/users" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'users' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Listado de usuarios</span>
                   </NavLink>
                 </li>
-                <li className="mb-1 last:mb-0 hover:bg-gray-900">
+                <li className="mb-1 last:mb-0 hover:bg-gray-900 p-2">
                   <NavLink onClick={()=>setShowUserOptions(true)} exact to="/users-roles"  className={`block text-gray-200  hover:text-white transition duration-150" ${page === 'users-roles' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Roles</span>
                   </NavLink>
                 </li>
-                <li className="mb-1 last:mb-0 hover:bg-gray-900 ">
+                <li className="mb-1 last:mb-0 hover:bg-gray-900 p-2">
                   <NavLink onClick={()=>setShowUserOptions(true)} exact to="/users"  className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Permisos</span>
                   </NavLink>
@@ -191,18 +191,18 @@ function Sidebar({
                   </div>
                 </div>
               </div>
-              <ul className={`pl-9 mt-1 ${!showServices && 'hidden'}`}>
-                <li className="mb-1 last:mb-0">
+              <ul className={`pl-9 p-1 ${!showServices && 'hidden'}`}>
+                <li className="mb-1 last:mb-0 hover:bg-gray-900 p-2">
                   <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'team-tabs' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Listar servicios</span>
                   </NavLink>
                 </li>
-                <li className="mb-1 last:mb-0">
+                <li className="mb-1 last:mb-0 hover:bg-gray-900 p-2">
                   <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Estados</span>
                   </NavLink>
                 </li>
-                  <li className="mb-1 last:mb-0">
+                  <li className="mb-1 last:mb-0 hover:bg-gray-900 p-2">
                   <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Usuarios</span>
                   </NavLink>
