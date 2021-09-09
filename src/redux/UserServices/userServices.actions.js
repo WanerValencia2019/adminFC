@@ -64,7 +64,7 @@ export const updateUserServices = ({
 	services[index] = { ...services[index],
 		...newData
 	};
-
+	console.log(services)
 	return dispatch({
 		type: ActionTypes.UPDATE_USER_SERVICES_SUCCESS,
 		payload: {

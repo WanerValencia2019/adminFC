@@ -13,7 +13,11 @@ import {  userServices } from './../../redux/selectors';
 function UserServices() {
   const userServiceState = useSelector(userServices);  
   const USER_SERVICES = userServiceState.services;
-  const [initial, setInital] = useState(userServiceState.services);
+  const [searchData, setSearchData] = useState(userServiceState.services);
+
+  const handleSearch = (text) => {
+      setSearchData((prev)=>prev.filter((u)=>u.userId.toLowerCase().includes(text.toLowerCase())));
+  }
 
 
   useEffect(() => {
@@ -27,9 +31,9 @@ function UserServices() {
         </h1>
       </WelcomeBanner>
       <div className="col-span-full xl:col-span-6 bg-white shadow-lg rounded-sm border border-gray-200">
-        <Search placeholder="Buscar por nombre" data = {initial} setData ={setInital} initialData={USER_SERVICES} />
+        <Search placeholder="Buscar por usuario" handleSearch={handleSearch} data = {searchData} setData ={setSearchData} initialData={USER_SERVICES} />
       </div>
-      <TableUserServices  data={initial} />      
+      <TableUserServices  data={searchData} />      
     </DashBoard>
   );
 }

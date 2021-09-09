@@ -13,7 +13,7 @@ export default function UserServiceForm({ data, cancel, confirm}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     let id = data?.id || 0;
-    confirm(		id = 0,
+    confirm(id,
 		userId,
 		stateServiceId,
 		servicesId,

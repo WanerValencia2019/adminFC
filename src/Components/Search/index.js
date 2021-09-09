@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react";
 
-export default function Search({initialData, data, setData, placeholder}) {
+export default function Search({initialData, handleSearch, setData, placeholder}) {
   const [search, setSearch] = useState("")
 
   const filterData = async (text) => {
-    setSearch(text);  
-    await setData((prev)=>prev.filter((u)=>u.username.toLowerCase().includes(search.toLowerCase())));
+    setSearch(text);
+    handleSearch(text);      
   }
   useEffect(() => {
     if(search.length === 0) setData(initialData);

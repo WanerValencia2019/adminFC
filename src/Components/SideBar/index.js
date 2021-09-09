@@ -161,12 +161,12 @@ function Sidebar({
               </NavLink>
             </li>
             {/* Campaigns */}
-            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === 'campaigns' && 'bg-gray-900'}`}>
-              <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'campaigns' && 'hover:text-gray-200'}`}>
+            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === 'matchs' && 'bg-gray-900'}`}>
+              <NavLink exact to="/matchs" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'matchs' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <svg className="flex-shrink-0 h-6 w-6 mr-3" viewBox="0 0 24 24">
-                    <path className={`fill-current text-gray-600 ${page === 'campaigns' && 'text-indigo-500'}`} d="M20 7a.75.75 0 01-.75-.75 1.5 1.5 0 00-1.5-1.5.75.75 0 110-1.5 1.5 1.5 0 001.5-1.5.75.75 0 111.5 0 1.5 1.5 0 001.5 1.5.75.75 0 110 1.5 1.5 1.5 0 00-1.5 1.5A.75.75 0 0120 7zM4 23a.75.75 0 01-.75-.75 1.5 1.5 0 00-1.5-1.5.75.75 0 110-1.5 1.5 1.5 0 001.5-1.5.75.75 0 111.5 0 1.5 1.5 0 001.5 1.5.75.75 0 110 1.5 1.5 1.5 0 00-1.5 1.5A.75.75 0 014 23z" />
-                    <path className={`fill-current text-gray-400 ${page === 'campaigns' && 'text-indigo-300'}`} d="M17 23a1 1 0 01-1-1 4 4 0 00-4-4 1 1 0 010-2 4 4 0 004-4 1 1 0 012 0 4 4 0 004 4 1 1 0 010 2 4 4 0 00-4 4 1 1 0 01-1 1zM7 13a1 1 0 01-1-1 4 4 0 00-4-4 1 1 0 110-2 4 4 0 004-4 1 1 0 112 0 4 4 0 004 4 1 1 0 010 2 4 4 0 00-4 4 1 1 0 01-1 1z" />
+                    <path className={`fill-current text-gray-600 ${page === 'matchs' && 'text-indigo-500'}`} d="M20 7a.75.75 0 01-.75-.75 1.5 1.5 0 00-1.5-1.5.75.75 0 110-1.5 1.5 1.5 0 001.5-1.5.75.75 0 111.5 0 1.5 1.5 0 001.5 1.5.75.75 0 110 1.5 1.5 1.5 0 00-1.5 1.5A.75.75 0 0120 7zM4 23a.75.75 0 01-.75-.75 1.5 1.5 0 00-1.5-1.5.75.75 0 110-1.5 1.5 1.5 0 001.5-1.5.75.75 0 111.5 0 1.5 1.5 0 001.5 1.5.75.75 0 110 1.5 1.5 1.5 0 00-1.5 1.5A.75.75 0 014 23z" />
+                    <path className={`fill-current text-gray-400 ${page === 'matchs' && 'text-indigo-300'}`} d="M17 23a1 1 0 01-1-1 4 4 0 00-4-4 1 1 0 010-2 4 4 0 004-4 1 1 0 012 0 4 4 0 004 4 1 1 0 010 2 4 4 0 00-4 4 1 1 0 01-1 1zM7 13a1 1 0 01-1-1 4 4 0 00-4-4 1 1 0 110-2 4 4 0 004-4 1 1 0 112 0 4 4 0 004 4 1 1 0 010 2 4 4 0 00-4 4 1 1 0 01-1 1z" />
                   </svg>
                   <span className="text-sm font-medium">Coincidencias</span>
                 </div>
@@ -209,9 +209,9 @@ function Sidebar({
                 </li>
               </ul>
             </li>
-            {/* Messages */}
+            {/* Payment types */}
             <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === 'messages' && 'bg-gray-900'}`}>
-              <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'messages' && 'hover:text-gray-200'}`}>
+              <NavLink exact to="/" className={`opacity-5 block text-gray-200 hover:text-white transition duration-150 ${page === 'messages' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <svg className="flex-shrink-0 h-6 w-6 mr-3" viewBox="0 0 24 24">
                     <path className={`fill-current text-gray-600 ${page === 'messages' && 'text-indigo-500'}`} d="M14.5 7c4.695 0 8.5 3.184 8.5 7.111 0 1.597-.638 3.067-1.7 4.253V23l-4.108-2.148a10 10 0 01-2.692.37c-4.695 0-8.5-3.184-8.5-7.11C6 10.183 9.805 7 14.5 7z" />
@@ -221,9 +221,21 @@ function Sidebar({
                 </div>
               </NavLink>
             </li>
+          {/* Transations */}
+            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === 'messages' && 'bg-gray-900'}`}>
+              <NavLink  exact to="/" className={`opacity-5 block text-gray-200 hover:text-white transition duration-150 ${page === 'messages' && 'hover:text-gray-200'}`}>
+                <div className="flex flex-grow">
+                  <svg className="flex-shrink-0 h-6 w-6 mr-3" viewBox="0 0 24 24">
+                    <path className={`fill-current text-gray-600 ${page === 'messages' && 'text-indigo-500'}`} d="M14.5 7c4.695 0 8.5 3.184 8.5 7.111 0 1.597-.638 3.067-1.7 4.253V23l-4.108-2.148a10 10 0 01-2.692.37c-4.695 0-8.5-3.184-8.5-7.11C6 10.183 9.805 7 14.5 7z" />
+                    <path className={`fill-current text-gray-400 ${page === 'messages' && 'text-indigo-300'}`} d="M11 1C5.477 1 1 4.582 1 9c0 1.797.75 3.45 2 4.785V19l4.833-2.416C8.829 16.85 9.892 17 11 17c5.523 0 10-3.582 10-8s-4.477-8-10-8z" />
+                  </svg>
+                  <span className="text-sm font-medium">Transacciones</span>
+                </div>
+              </NavLink>
+            </li>
             {/* Settings */}
             <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === 'settings' && 'bg-gray-900'}`}>
-              <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'settings' && 'hover:text-gray-200'}`}>
+              <NavLink exact to="/" className={`opacity-5 block text-gray-200 hover:text-white transition duration-150 ${page === 'settings' && 'hover:text-gray-200'}`}>
                 <div className="flex flex-grow">
                   <svg className="flex-shrink-0 h-6 w-6 mr-3" viewBox="0 0 24 24">
                     <path className={`fill-current text-gray-600 ${page === 'settings' && 'text-indigo-500'}`} d="M19.714 14.7l-7.007 7.007-1.414-1.414 7.007-7.007c-.195-.4-.298-.84-.3-1.286a3 3 0 113 3 2.969 2.969 0 01-1.286-.3z" />

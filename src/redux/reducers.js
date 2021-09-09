@@ -7,6 +7,7 @@ import interestsReducer from './Interests/interests.reducers';
 import servicesReducer from './Services/services.reducers';
 import stateServicesReducer from './StateServices/stateServices.reducers';
 import userServicesReducer from './UserServices/userServices.reducers';
+import matchsReducer from './Matchs/matchs.reducers';
 
 
 
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     services: servicesReducer,
     stateServices: stateServicesReducer,
     userServices: userServicesReducer,
+    matchs: matchsReducer,
 });
 
 export default rootReducer;

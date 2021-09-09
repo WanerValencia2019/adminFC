@@ -13,8 +13,11 @@ import {  services } from './../../redux/selectors';
 function Services() {
   const serviceState = useSelector(services);  
   const SERVICES = serviceState.services;
-  const [initial, setInital] = useState(serviceState.services);
+  const [searchData, setSearchData] = useState(serviceState.services);
 
+    const handleSearch = (text) => {
+      setSearchData((prev)=>prev.filter((u)=>u.name.toLowerCase().includes(text.toLowerCase())));
+    }
 
   useEffect(() => {
   }, [serviceState])
@@ -27,9 +30,9 @@ function Services() {
         </h1>
       </WelcomeBanner>
       <div className="col-span-full xl:col-span-6 bg-white shadow-lg rounded-sm border border-gray-200">
-        <Search placeholder="Buscar por nombre" data = {initial} setData ={setInital} initialData={SERVICES} />
+        <Search placeholder="Buscar por nombre"handleSearch={handleSearch} handleSearch={handleSearch} data = {searchData} setData ={setSearchData} initialData={SERVICES} />
       </div>
-      <TableServices  data={initial} />      
+      <TableServices  data={searchData} />      
     </DashBoard>
   );
 }

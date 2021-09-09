@@ -19,6 +19,7 @@ import Interests from './pages/Interests';
 import Services from './pages/Services';
 import StateServices from './pages/StateServices';
 import UserServices from './pages/UserServices';
+import Matchs from './pages/Matchs';
 
 
 
@@ -56,8 +57,11 @@ function App() {
         <Route exact path="/services-states">
             <StateServices />
         </Route>
-          <Route exact path="/services-users">
+        <Route exact path="/services-users">
             <UserServices />
+        </Route>
+         <Route exact path="/matchs">
+            <Matchs />
         </Route>
       </Switch>
     </>
