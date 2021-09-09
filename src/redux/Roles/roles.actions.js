@@ -10,7 +10,6 @@ export const addRol =
 		status
 	}) => (dispatch, prevState) => {
 		let count = prevState().rolesUser.roles.length
-		console.log('TAMAÑO '+count)
 		return dispatch({
 			type: ActionTypes.ADD_ROLE_SUCCESS,
 			payload: {
@@ -23,9 +22,10 @@ export const addRol =
 		});
 	};
 
-export const deleteRol = ({
+export const deleteRol = (
 	id
-}) => (dispatch, prevState) => {
+) => (dispatch, prevState) => {
+	console.log(id)
 	let roles = prevState().rolesUser.roles.filter((rol) => rol.id !== id);
 	return dispatch({
 		type: ActionTypes.DELETE_ROLE_SUCCESS,

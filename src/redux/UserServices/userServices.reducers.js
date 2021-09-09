@@ -1,10 +1,14 @@
 import ActionTypes from "../actionTypes";
 
 
-/*const servicesDefaultData = {
+/*const userServicesDefaultData = {
 	id:0,
-	name: '',
+	userId: 0,
+	stateServiceId: 0,
+	servicesId: 0,
+	value: 0.0,
 	description: '',
+	dateService: new Date().toISOString(),
 	createdAt: new Date().toISOString()
 }*/
 
@@ -17,25 +21,29 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case ActionTypes.LOAD_SERVICES:
+		case ActionTypes.LOAD_USER_SERVICES:
 			return { ...state
 			}
-		case ActionTypes.ADD_SERVICES_SUCCESS:
+		case ActionTypes.ADD_USER_SERVICES_SUCCESS:
 			return { ...state,
 				services: [
 					...state.services, {
 						id: action.payload.id,
-						name: action.payload.name,
+						userId: action.payload.userId,
+						stateServiceId: action.payload.stateServiceId,
+						servicesId: action.payload.servicesId,
+						value: action.payload.value,
 						description: action.payload.description,
+						dateService: action.payload.dateService,
 						createdAt: action.payload.createdAt
 					}
 				]
 			}
-		case ActionTypes.DELETE_SERVICES_SUCCESS:
+		case ActionTypes.DELETE_USER_SERVICES_SUCCESS:
 			return { ...state,
 				services: action.payload.services
 			}
-		case ActionTypes.UPDATE_SERVICES_SUCCESS:
+		case ActionTypes.UPDATE_USER_SERVICES_SUCCESS:
 			return { ...state,
 				services: action.payload.services
 			}

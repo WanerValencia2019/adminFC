@@ -1,7 +1,8 @@
 import React from 'react'
+
 import {
-  deleteInterest,
-} from "./../../../redux/Interests/interests.actions";
+  deleteStateServices
+} from "./../../../redux/StateServices/stateServices.actions";
 
 
 import { ExclamationIcon } from "@heroicons/react/solid";
@@ -31,7 +32,7 @@ export default function DeleteForm({cancel, data}) {
           </Dialog.Title>
           <div className="mt-2">
             <p className="text-sm text-gray-500">
-              ¿ Estás seguro que deseas eliminar el interes {data.name}?
+              ¿ Estás seguro que deseas eliminar el servicio {data.name}?
             </p>
           </div>
         </div>
@@ -41,7 +42,7 @@ export default function DeleteForm({cancel, data}) {
           type="button"
           className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
           onClick={() => {
-            dispatch(deleteInterest(data.id));
+            dispatch(deleteStateServices(data.id));
             cancel();
           }}
         >

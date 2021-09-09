@@ -1,7 +1,11 @@
-.user {
+.table-link {
     cursor: pointer;
 }
 
-.user:hover {
+.table-link:hover {
     opacity: .6;
 }
+
+
+
+

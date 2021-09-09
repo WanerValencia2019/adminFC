@@ -1,17 +1,12 @@
 import React from 'react'
-import {
-  deleteInterest,
-} from "./../../../redux/Interests/interests.actions";
+
 
 
 import { ExclamationIcon } from "@heroicons/react/solid";
 import { Dialog } from "@headlessui/react";
 
-import { useDispatch } from "react-redux";
 
-
-export default function DeleteForm({cancel, data}) {
-	const dispatch = useDispatch();
+export default function DeleteForm({confirm, cancel, title, message}) {
 
 	return (
 		<div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -27,11 +22,11 @@ export default function DeleteForm({cancel, data}) {
             as="h3"
             className="text-lg leading-6 font-medium text-gray-900"
           >
-            Eliminar usuario
+            {title}
           </Dialog.Title>
           <div className="mt-2">
             <p className="text-sm text-gray-500">
-              ¿ Estás seguro que deseas eliminar el interes {data.name}?
+              {message}
             </p>
           </div>
         </div>
@@ -41,7 +36,7 @@ export default function DeleteForm({cancel, data}) {
           type="button"
           className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
           onClick={() => {
-            dispatch(deleteInterest(data.id));
+            confirm();
             cancel();
           }}
         >

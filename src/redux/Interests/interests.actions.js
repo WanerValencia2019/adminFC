@@ -23,9 +23,9 @@ export const addInterest =
 		});
 	};
 
-export const deleteInterest = ({
+export const deleteInterest = (
 	id
-}) => (dispatch, prevState) => {
+) => (dispatch, prevState) => {
 	let interests = prevState().interest.interests.filter((interest) => interest.id !== id);
 	return dispatch({
 		type: ActionTypes.DELETE_INTEREST_SUCCESS,
@@ -47,16 +47,16 @@ export const updateInterest = ({
 		status
 	}
 	let index = prevState().interest.interests.findIndex((r) => r.id === id);
-	let interest = prevState().interest.roles;
+	let interests = prevState().interest.interests;
 
-	interest[index] = { ...interest[index],
+	interests[index] = { ...interests[index],
 		...newData
 	};
 
 	return dispatch({
 		type: ActionTypes.UPDATE_INTEREST_SUCCESS,
 		payload: {
-			interest
+			interests
 		},
 	});
 }

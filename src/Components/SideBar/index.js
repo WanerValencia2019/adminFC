@@ -185,25 +185,25 @@ function Sidebar({
                   </div>
                   {/* Icon */}
                   <div className="flex flex-shrink-0 ml-2">
-                    <svg className={`w-3 h-3 flex-shrink-0 ml-1 fill-current text-gray-400 ${page.startsWith('team-') && 'transform rotate-180'}`} viewBox="0 0 12 12">
+                    <svg className={`w-3 h-3 flex-shrink-0 ml-1 fill-current text-gray-400 ${page.startsWith('services-') && 'transform rotate-180'}`} viewBox="0 0 12 12">
                       <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
                     </svg>
                   </div>
                 </div>
               </div>
-              <ul className={`pl-9 p-1 ${!showServices && 'hidden'}`}>
+              <ul className={`pl-9 p-1 ${(!showServices && !page.startsWith('services')) && 'hidden'}`}>
                 <li className="mb-1 last:mb-0 hover:bg-gray-900 p-2">
-                  <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'team-tabs' && 'text-indigo-400 hover:text-indigo-400'}`}>
+                  <NavLink exact to="/services" className={`block text-gray-200 hover:text-white transition duration-150 ${page === 'services' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Listar servicios</span>
                   </NavLink>
                 </li>
                 <li className="mb-1 last:mb-0 hover:bg-gray-900 p-2">
-                  <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
+                  <NavLink exact to="/services-states" className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'services-states' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Estados</span>
                   </NavLink>
                 </li>
                   <li className="mb-1 last:mb-0 hover:bg-gray-900 p-2">
-                  <NavLink exact to="/" className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'team-tiles' && 'text-indigo-400 hover:text-indigo-400'}`}>
+                  <NavLink exact to="/services-users" className={`block text-gray-200 hover:text-white transition duration-150" ${page === 'services-users' && 'text-indigo-400 hover:text-indigo-400'}`}>
                     <span className="text-sm font-medium">Usuarios</span>
                   </NavLink>
                 </li>

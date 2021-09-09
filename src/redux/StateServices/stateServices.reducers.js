@@ -1,7 +1,7 @@
 import ActionTypes from "../actionTypes";
 
 
-/*const servicesDefaultData = {
+/*const interestsDefaultData = {
 	id:0,
 	name: '',
 	description: '',
@@ -9,7 +9,7 @@ import ActionTypes from "../actionTypes";
 }*/
 
 const initialState = {
-	services: [],
+	states: [],
 	error: false,
 	message: null,
 }
@@ -17,13 +17,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case ActionTypes.LOAD_SERVICES:
+		case ActionTypes.LOAD_STATE_SERVICES:
 			return { ...state
 			}
-		case ActionTypes.ADD_SERVICES_SUCCESS:
+		case ActionTypes.ADD_STATE_SERVICES_SUCCESS:
 			return { ...state,
-				services: [
-					...state.services, {
+				states: [
+					...state.states, {
 						id: action.payload.id,
 						name: action.payload.name,
 						description: action.payload.description,
@@ -31,13 +31,13 @@ const reducer = (state = initialState, action) => {
 					}
 				]
 			}
-		case ActionTypes.DELETE_SERVICES_SUCCESS:
+		case ActionTypes.DELETE_STATE_SERVICES_SUCCESS:
 			return { ...state,
-				services: action.payload.services
+				states: action.payload.states
 			}
-		case ActionTypes.UPDATE_SERVICES_SUCCESS:
+		case ActionTypes.UPDATE_STATE_SERVICES_SUCCESS:
 			return { ...state,
-				services: action.payload.services
+				states: action.payload.states
 			}
 		default:
 			return state;

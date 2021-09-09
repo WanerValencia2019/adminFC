@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 
 import './css/style.scss';
+import './css/styles.css';
 
 import { focusHandling } from 'cruip-js-toolkit';
 import './charts/ChartjsConfig';
@@ -15,6 +16,10 @@ import Home from './pages/Home';
 import Users from './pages/Users';
 import Roles from './pages/Roles';
 import Interests from './pages/Interests';
+import Services from './pages/Services';
+import StateServices from './pages/StateServices';
+import UserServices from './pages/UserServices';
+
 
 
 
@@ -44,6 +49,15 @@ function App() {
         </Route>
         <Route exact path="/interests">
             <Interests />
+        </Route>
+         <Route exact path="/services">
+            <Services />
+        </Route>
+        <Route exact path="/services-states">
+            <StateServices />
+        </Route>
+          <Route exact path="/services-users">
+            <UserServices />
         </Route>
       </Switch>
     </>
