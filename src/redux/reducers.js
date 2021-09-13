@@ -2,12 +2,13 @@ import { combineReducers } from 'redux';
 
 //reducers
 import userReducer from './Users/users.reducer';
-import rolesReducer from './Roles/roles.reducers';
-import interestsReducer from './Interests/interests.reducers';
-import servicesReducer from './Services/services.reducers';
-import stateServicesReducer from './StateServices/stateServices.reducers';
-import userServicesReducer from './UserServices/userServices.reducers';
-import matchsReducer from './Matchs/matchs.reducers';
+import rolesReducer from './Roles/roles.reducer';
+import interestsReducer from './Interests/interests.reducer';
+import servicesReducer from './Services/services.reducer';
+import stateServicesReducer from './StateServices/stateServices.reducer';
+import userServicesReducer from './UserServices/userServices.reducer';
+import matchsReducer from './Matchs/matchs.reducer';
+import paymentTypesReducer from './PaymentTypes/paymentTypes.reducer';
 
 
 
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     stateServices: stateServicesReducer,
     userServices: userServicesReducer,
     matchs: matchsReducer,
+    paymentTypes: paymentTypesReducer,
 });
 
 export default rootReducer;

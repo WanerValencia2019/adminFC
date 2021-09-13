@@ -20,6 +20,7 @@ import Services from './pages/Services';
 import StateServices from './pages/StateServices';
 import UserServices from './pages/UserServices';
 import Matchs from './pages/Matchs';
+import PaymentTypes from './pages/PaymentTypes';
 
 
 
@@ -62,6 +63,9 @@ function App() {
         </Route>
          <Route exact path="/matchs">
             <Matchs />
+        </Route>
+        <Route exact path="/paymentTypes">
+            <PaymentTypes />
         </Route>
       </Switch>
     </>
