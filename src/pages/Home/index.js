@@ -6,7 +6,7 @@ import DashboardAvatars from "../../partials/dashboard/DashboardAvatars";
 import FilterButton from "../../partials/actions/FilterButton";
 import Datepicker from "../../partials/actions/Datepicker";
 
-import DashboardCard04 from '../../partials/dashboard/DashboardCard04';
+import DashboardCard04 from "../../partials/dashboard/DashboardCard04";
 import DashboardCard05 from '../../partials/dashboard/DashboardCard05';
 
 function Home() {
