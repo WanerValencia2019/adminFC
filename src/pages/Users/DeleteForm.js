@@ -1,7 +1,8 @@
 import React from 'react'
+
 import {
   deleteUser
-} from "./../../../redux/Users/users.actions";
+} from "./../../redux/Users/users.actions";
 
 
 import { ExclamationIcon } from "@heroicons/react/solid";
