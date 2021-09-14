@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 
+import { useSelector } from 'react-redux';
+
+import { services, stateServices, listUsers} from '../../redux/selectors';
+
 export default function UserServiceForm({ data, cancel, confirm}) {
-  const [userId, setUserId] = useState(data?.userId || 0);
-  const [stateServiceId, setStateServiceId] = useState(data?.stateServiceId || 0)
-  const [servicesId, setServicesId] = useState(data?.servicesId || 0)
+
+  const serviceState = useSelector(services).services;
+  const userState = useSelector(listUsers).users;
+  const listStates = useSelector(stateServices).states;
+
+  const [userId, setUserId] = useState(data?.userId || userState[0]?.id);
+  const [stateServiceId, setStateServiceId] = useState(data?.stateServiceId || listStates[0]?.id)
+  const [servicesId, setServicesId] = useState(data?.servicesId || serviceState[0]?.id)
   const [value, setValue] = useState(data?.value || 0.0)
   const [dateService, setDateService] = useState(data?.dateService || new Date().toISOString())
   const [description, setDescription] = useState(data?.description || "");
@@ -57,9 +66,7 @@ export default function UserServiceForm({ data, cancel, confirm}) {
                       value={userId}
                       onChange={(e)=>setUserId(e.target.value)}
                     >
-                      <option value={1}>1 -josepedro</option>
-                      <option value={2}>2 -morenoval</option>
-                      <option value={3}>3 -andresmartinez</option>
+                    {userState.map((user)=>(<option key={user.username} value={user.id}>{user.id} - {user.username}</option>))}
                     </select>
                   </div>
                   <div className="col-span-6 sm:col-span-6">
@@ -75,10 +82,9 @@ export default function UserServiceForm({ data, cancel, confirm}) {
                       autoComplete="country"
                       className="form-select mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       value={servicesId}
-                      onChange={(e)=>setServicesId(e.target.value)}
+                      onChange={(e)=>setServicesId(Number(e.target.value))}
                     >
-                      <option value={1}>1 - Cita linda - Activo </option>
-                      <option value={2}>1 - Cita linda - Activo </option>
+                    {serviceState.map((value)=>(<option key={value.id} value={value.id}>{value.id} - {value.name}</option>))}
                     </select>
                   </div>
                     <div className="col-span-12 sm:col-span-6">
@@ -95,9 +101,8 @@ export default function UserServiceForm({ data, cancel, confirm}) {
                       className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       value = {stateServiceId}
                       onChange = {(e)=>setStateServiceId(e.target.value)}
-                    >
-                      <option value={1}>Activo</option>
-                      <option value={2}>Inactivo</option>
+                    >                    
+                    {listStates.map((value)=>(<option key={value.id} value={value.id}>{value.id} - {value.name}</option>))}
                     </select>
                   </div>
                   <div className="col-span-10 sm:col-span-12">

@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
+import { useSelector } from 'react-redux';
+
+import { services, stateServices, listUsers} from '../../redux/selectors';
+
 export default function UserServiceForm({ data, cancel, confirm}) {
+  const userState = useSelector(listUsers).users;
   const [userId, setUserId] = useState(data?.userId || 0);
   const [userMatchId, setUserMatchId] = useState(data?.userMatchId || 0)
   const [matchedAt, setMatchedAt] = useState(data?.matchedAt || new Date().toISOString())
@@ -54,9 +59,7 @@ export default function UserServiceForm({ data, cancel, confirm}) {
                       value={userId}
                       onChange={(e)=>setUserId(e.target.value)}
                     >
-                      <option value={1}>1 -josepedro</option>
-                      <option value={2}>2 -morenoval</option>
-                      <option value={3}>3 -andresmartinez</option>
+                    {userState.map((user)=>(<option key={user.username} value={user.id}>{user.id} - {user.username}</option>))}
                     </select>
                   </div>
                   <div className="col-span-6 sm:col-span-6 ">
@@ -74,9 +77,7 @@ export default function UserServiceForm({ data, cancel, confirm}) {
                       value={userMatchId}
                       onChange={(e)=>setUserMatchId(e.target.value)}
                     >
-                     <option value={1}>1 -josepedro</option>
-                      <option value={2}>2 -morenoval</option>
-                      <option value={3}>3 -andresmartinez</option>
+                    {userState.map((user)=>(<option key={user.username} value={user.id}>{user.id} - {user.username}</option>))}
                     </select>
                   </div>
                     <div className="col-span-12 sm:col-span-6 mt-3">
