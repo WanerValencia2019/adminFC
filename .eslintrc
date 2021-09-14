@@ -1,35 +1,29 @@
 {
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react",
-    "plugin:prettier/recommended",
-    "eslint-config-prettier"
-  ],
-  "parser": "babel-eslint",
-  "env": {
-    "jest": true
-  },
-  "rules": {
-    "no-console": "off",
-    "no-use-before-define": "off",
-    "react/jsx-filename-extension": "off",
-    "react/prop-types": "off",
-    "comma-dangle": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "printWidth": 100,
-        "trailingComma": "all",
-        "tabWidth": 4,
-        "semi": true,
-        "singleQuote": false
-      }
-    ]
-  },
-  "plugins": ["prettier"],
-  "globals": {
-    "_DEV_": true,
-    "fetch": false
-  }
+    "extends": ["airbnb", "prettier", "plugin:prettier/recommended", "eslint-config-prettier"],
+    "parser": "babel-eslint",
+    "env": {
+        "jest": true
+    },
+    "rules": {
+        "no-console": "off",
+        "no-use-before-define": "off",
+        "react/jsx-filename-extension": "off",
+        "react/prop-types": "off",
+        "comma-dangle": "off",
+        "prettier/prettier": [
+            "error",
+            {
+                "printWidth": 100,
+                "trailingComma": "all",
+                "tabWidth": 4,
+                "semi": true,
+                "singleQuote": false
+            }
+        ]
+    },
+    "plugins": ["prettier"],
+    "globals": {
+        "_DEV_": true,
+        "fetch": false
+    }
 }
