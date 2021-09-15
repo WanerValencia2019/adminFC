@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-//reducers
+// reducers
 import userReducer from './Users/users.reducer';
 import rolesReducer from './Roles/roles.reducer';
 import interestsReducer from './Interests/interests.reducer';
@@ -10,11 +10,8 @@ import userServicesReducer from './UserServices/userServices.reducer';
 import matchsReducer from './Matchs/matchs.reducer';
 import paymentTypesReducer from './PaymentTypes/paymentTypes.reducer';
 
-
-
-
 const rootReducer = combineReducers({
-    listUsers:userReducer,
+    listUsers: userReducer,
     rolesUser: rolesReducer,
     interest: interestsReducer,
     services: servicesReducer,

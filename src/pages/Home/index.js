@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import DashBoard from "../../Components/DashBoard";
-import WelcomeBanner from "../../Components/WelcomeBanner/index";
-import DashboardAvatars from "../../partials/dashboard/DashboardAvatars";
-import FilterButton from "../../partials/actions/FilterButton";
-import Datepicker from "../../partials/actions/Datepicker";
+import DashBoard from '../../Components/DashBoard';
+import WelcomeBanner from '../../Components/WelcomeBanner/index';
+import DashboardAvatars from '../../partials/dashboard/DashboardAvatars';
+import FilterButton from '../../partials/actions/FilterButton';
+import Datepicker from '../../partials/actions/Datepicker';
 
-import DashboardCard04 from "../../partials/dashboard/DashboardCard04";
-import DashboardCard05 from "../../partials/dashboard/DashboardCard05";
+import DashboardCard04 from '../../partials/dashboard/DashboardCard04';
+import DashboardCard05 from '../../partials/dashboard/DashboardCard05';
 
 function Home() {
     return (
