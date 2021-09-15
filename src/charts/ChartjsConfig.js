@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 // Import Chart.js
 import { Chart, Tooltip } from 'chart.js';
 // Import Tailwind config
@@ -26,17 +27,22 @@ Chart.defaults.plugins.tooltip.padding = 8;
 
 // Register Chart.js plugin to add a bg option for chart area
 Chart.register({
-  id: 'chartAreaPlugin',
-  // eslint-disable-next-line object-shorthand
-  beforeDraw: (chart) => {
-    if (chart.config.options.chartArea && chart.config.options.chartArea.backgroundColor) {
-      const ctx = chart.canvas.getContext('2d');
-      const { chartArea } = chart;
-      ctx.save();
-      ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
-      // eslint-disable-next-line max-len
-      ctx.fillRect(chartArea.left, chartArea.top, chartArea.right - chartArea.left, chartArea.bottom - chartArea.top);
-      ctx.restore();
-    }
-  },
+    id: 'chartAreaPlugin',
+    // eslint-disable-next-line object-shorthand
+    beforeDraw: (chart) => {
+        if (chart.config.options.chartArea && chart.config.options.chartArea.backgroundColor) {
+            const ctx = chart.canvas.getContext('2d');
+            const { chartArea } = chart;
+            ctx.save();
+            ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
+            // eslint-disable-next-line max-len
+            ctx.fillRect(
+                chartArea.left,
+                chartArea.top,
+                chartArea.right - chartArea.left,
+                chartArea.bottom - chartArea.top,
+            );
+            ctx.restore();
+        }
+    },
 });
