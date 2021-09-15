@@ -1,9 +1,6 @@
+/* eslint-disable no-undef */
 import React, { useEffect } from 'react';
-import {
-  Switch,
-  Route,
-  useLocation
-} from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 
 import './css/style.scss';
 import './css/styles.css';
@@ -22,54 +19,49 @@ import UserServices from './pages/UserServices';
 import Matchs from './pages/Matchs';
 import PaymentTypes from './pages/PaymentTypes';
 
-
-
-
-
 function App() {
+    const location = useLocation();
 
-  const location = useLocation();
+    useEffect(() => {
+        document.querySelector('html').style.scrollBehavior = 'auto';
+        window.scroll({ top: 0 });
+        document.querySelector('html').style.scrollBehavior = '';
+        focusHandling('outline');
+    }, [location.pathname]); // triggered on route change
 
-  useEffect(() => {
-    document.querySelector('html').style.scrollBehavior = 'auto'
-    window.scroll({ top: 0 })
-    document.querySelector('html').style.scrollBehavior = ''
-    focusHandling('outline');
-  }, [location.pathname]); // triggered on route change
-
-  return (
-    <>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/users">
-            <Users />          
-        </Route>
-        <Route exact path="/users-roles">
-            <Roles />
-        </Route>
-        <Route exact path="/interests">
-            <Interests />
-        </Route>
-         <Route exact path="/services">
-            <Services />
-        </Route>
-        <Route exact path="/services-states">
-            <StateServices />
-        </Route>
-        <Route exact path="/services-users">
-            <UserServices />
-        </Route>
-         <Route exact path="/matchs">
-            <Matchs />
-        </Route>
-        <Route exact path="/paymentTypes">
-            <PaymentTypes />
-        </Route>
-      </Switch>
-    </>
-  );
+    return (
+        <>
+            <Switch>
+                <Route exact path="/">
+                    <Home />
+                </Route>
+                <Route exact path="/users">
+                    <Users />
+                </Route>
+                <Route exact path="/users-roles">
+                    <Roles />
+                </Route>
+                <Route exact path="/interests">
+                    <Interests />
+                </Route>
+                <Route exact path="/services">
+                    <Services />
+                </Route>
+                <Route exact path="/services-states">
+                    <StateServices />
+                </Route>
+                <Route exact path="/services-users">
+                    <UserServices />
+                </Route>
+                <Route exact path="/matchs">
+                    <Matchs />
+                </Route>
+                <Route exact path="/paymentTypes">
+                    <PaymentTypes />
+                </Route>
+            </Switch>
+        </>
+    );
 }
 
 export default App;

@@ -2,7 +2,7 @@
     "name": "mosaic-light-react",
     "version": "0.1.0",
     "private": true,
-    "lint": "eslint *.js **/*.js --ignore-path .gitignore src/utils src/partials",
+    "lint": "eslint *.js **/*.js ",
     "dependencies": {
         "@craco/craco": "^6.1.1",
         "@headlessui/react": "^1.4.1",
