@@ -4,7 +4,7 @@ import { ExclamationIcon } from '@heroicons/react/solid';
 import { Dialog } from '@headlessui/react';
 
 import { useDispatch } from 'react-redux';
-import { deleteInterest } from '../../../redux/Interests/interests.actions';
+import { deleteInterest } from '../../redux/Interests/interests.actions';
 
 export default function DeleteForm({ cancel, data }) {
     const dispatch = useDispatch();

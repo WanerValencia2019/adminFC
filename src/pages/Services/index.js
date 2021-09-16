@@ -1,22 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import DashBoard from '../../Components/DashBoard';
 import WelcomeBanner from '../../Components/WelcomeBanner/index';
 import Search from '../../Components/Search';
 
-import TableServices from './TableServices';
 import { services } from '../../redux/selectors';
+
+import DataCRUD from '../../Components/DataCRUD';
+import ServicesForm from '../../Components/ServicesForm';
+
+import DeleteForm from './DeleteForm';
+
+import { addServices, updateServices } from '../../redux/Services/services.actions';
+
+const columnsModel = [
+    {
+        name: 'Nombre',
+        selector: (row) => row?.name,
+        sortable: true,
+    },
+    {
+        name: 'Descripción',
+        selector: (row) => row?.description,
+        sortable: true,
+    },
+    {
+        name: 'Fecha de creación',
+        selector: (row) => row?.createdAt,
+        sortable: true,
+    },
+];
 
 function Services() {
     const serviceState = useSelector(services);
     const SERVICES = serviceState.services;
     const [searchData, setSearchData] = useState(serviceState.services);
+    const dispatch = useDispatch();
 
     const handleSearch = (text) => {
         setSearchData((prev) =>
             prev.filter((u) => u.name.toLowerCase().includes(text.toLowerCase())),
         );
+    };
+    const handleAddSubmit = (id = 0, name, description) => {
+        dispatch(addServices({ id, name, description }));
+    };
+    const handleEditSubmit = (id, name, description) => {
+        dispatch(updateServices({ id, name, description }));
     };
 
     useEffect(() => {}, [serviceState]);
@@ -35,7 +66,15 @@ function Services() {
                     initialData={SERVICES}
                 />
             </div>
-            <TableServices data={searchData} />
+            <DataCRUD
+                title="Servicios"
+                data={searchData}
+                columns={columnsModel}
+                form={ServicesForm}
+                removeForm={DeleteForm}
+                add={handleAddSubmit}
+                update={handleEditSubmit}
+            />
         </DashBoard>
     );
 }

@@ -1,17 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import DashBoard from '../../Components/DashBoard';
 import WelcomeBanner from '../../Components/WelcomeBanner/index';
 import Search from '../../Components/Search';
 
-import TableUserServices from './TableUserServices';
+import DataCRUD from '../../Components/DataCRUD';
+
+import UserServicesForm from '../../Components/UserServicesForm';
+import DeleteForm from './DeleteForm';
+
+import { addUserServices, updateUserServices } from '../../redux/UserServices/userServices.actions';
+
 import { userServices } from '../../redux/selectors';
+
+const columnsModel = [
+    {
+        name: 'Usuario',
+        selector: (row) => row?.userId,
+        sortable: true,
+    },
+    {
+        name: 'Servicio',
+        selector: (row) => row?.servicesId,
+        sortable: true,
+    },
+    {
+        name: 'Estado',
+        selector: (row) => row?.stateServiceId,
+        sortable: true,
+    },
+    {
+        name: 'Valor',
+        selector: (row) => row?.value,
+        sortable: true,
+    },
+    {
+        name: 'Fecha',
+        selector: (row) => row?.dateService,
+        sortable: true,
+    },
+    {
+        name: 'Fecha de creación',
+        selector: (row) => row?.createdAt,
+        sortable: true,
+    },
+];
 
 function UserServices() {
     const userServiceState = useSelector(userServices);
     const USER_SERVICES = userServiceState.services;
     const [searchData, setSearchData] = useState(userServiceState.services);
+    const dispatch = useDispatch();
 
     const handleSearch = (text) => {
         setSearchData((prev) =>
@@ -20,6 +60,49 @@ function UserServices() {
     };
 
     useEffect(() => {}, [userServiceState]);
+
+    const handleAddSubmit = (
+        id,
+        userId,
+        stateServiceId,
+        servicesId,
+        value,
+        description,
+        dateService,
+    ) => {
+        dispatch(
+            addUserServices({
+                id,
+                userId,
+                stateServiceId,
+                servicesId,
+                value,
+                description,
+                dateService,
+            }),
+        );
+    };
+    const handleEditSubmit = (
+        id,
+        userId,
+        stateServiceId,
+        servicesId,
+        value,
+        description,
+        dateService,
+    ) => {
+        dispatch(
+            updateUserServices({
+                id,
+                userId,
+                stateServiceId,
+                servicesId,
+                value,
+                description,
+                dateService,
+            }),
+        );
+    };
 
     return (
         <DashBoard>
@@ -37,7 +120,15 @@ function UserServices() {
                     initialData={USER_SERVICES}
                 />
             </div>
-            <TableUserServices data={searchData} />
+            <DataCRUD
+                title="Servicios de usuarios"
+                data={searchData}
+                columns={columnsModel}
+                form={UserServicesForm}
+                removeForm={DeleteForm}
+                add={handleAddSubmit}
+                update={handleEditSubmit}
+            />
         </DashBoard>
     );
 }

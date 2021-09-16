@@ -4,10 +4,12 @@ import { ExclamationIcon } from '@heroicons/react/solid';
 import { Dialog } from '@headlessui/react';
 
 import { useDispatch } from 'react-redux';
-import { deletePaymentType } from '../../../redux/PaymentTypes/paymentTypes.actions';
+import { deleteUserServices } from '../../redux/UserServices/userServices.actions';
 
 export default function DeleteForm({ cancel, data }) {
     const dispatch = useDispatch();
+
+    console.log(data);
 
     return (
         <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -21,7 +23,7 @@ export default function DeleteForm({ cancel, data }) {
                     </Dialog.Title>
                     <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                            ¿ Estás seguro que deseas eliminar el metódo de pago {data.name}?
+                            ¿ Estás seguro que deseas eliminar el servicio {data.id}?
                         </p>
                     </div>
                 </div>
@@ -31,7 +33,7 @@ export default function DeleteForm({ cancel, data }) {
                     type="button"
                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => {
-                        dispatch(deletePaymentType(data.id));
+                        dispatch(deleteUserServices(data.id));
                         cancel();
                     }}
                 >

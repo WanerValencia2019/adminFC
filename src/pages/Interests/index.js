@@ -1,25 +1,69 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import DashBoard from '../../Components/DashBoard';
 import WelcomeBanner from '../../Components/WelcomeBanner/index';
 import Search from '../../Components/Search';
 
-import TableInterests from './TableInterests';
+import DataCRUD from '../../Components/DataCRUD';
 import { interest } from '../../redux/selectors';
+
+import InterestForm from '../../Components/InterestForm';
+import DeleteForm from './DeleteForm';
+
+import { addInterest, updateInterest } from '../../redux/Interests/interests.actions';
+
+const columnsModel = [
+    {
+        name: 'Nombre',
+        selector: (row) => row?.name,
+        sortable: true,
+    },
+    {
+        name: 'Descripción',
+        selector: (row) => row?.description,
+        sortable: true,
+    },
+    {
+        name: 'Estado',
+        selector: (row) => row?.statusText,
+        sortable: true,
+        conditionalCellStyles: [
+            {
+                when: (row) => row.status === true,
+                classNames: ['text-green-400'],
+            },
+            {
+                when: (row) => row.status === false,
+                classNames: ['text-red-500'],
+            },
+        ],
+    },
+    {
+        name: 'Fecha de creación',
+        selector: (row) => row?.createdAt,
+        sortable: true,
+    },
+];
 
 export default function Interest() {
     const interestState = useSelector(interest);
     const INTEREST = interestState.interests;
     const [searchData, setSearchData] = useState(interestState.interests);
 
+    const dispatch = useDispatch();
+
+    const handleAddSubmit = (id = 0, name, description, status) => {
+        dispatch(addInterest({ id, name, description, status }));
+    };
+    const handleEditSubmit = (id, name, description, status) => {
+        dispatch(updateInterest({ id, name, description, status }));
+    };
     const handleSearch = (text) => {
         setSearchData((prev) =>
             prev.filter((u) => u.name.toLowerCase().includes(text.toLowerCase())),
         );
     };
-
-    useEffect(() => {}, [interestState]);
 
     return (
         <DashBoard>
@@ -35,7 +79,15 @@ export default function Interest() {
                     initialData={INTEREST}
                 />
             </div>
-            <TableInterests data={searchData} />
+            <DataCRUD
+                title="Intereses"
+                data={searchData}
+                columns={columnsModel}
+                form={InterestForm}
+                removeForm={DeleteForm}
+                add={handleAddSubmit}
+                update={handleEditSubmit}
+            />
         </DashBoard>
     );
 }

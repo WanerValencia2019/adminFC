@@ -39,6 +39,7 @@ const columnsModel = [
 
 function Users() {
     const userState = useSelector(listUsers);
+
     const tableHeaders = [
         'usuario',
         'nombre',

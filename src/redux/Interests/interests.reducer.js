@@ -28,6 +28,7 @@ const reducer = (state = initialState, action) => {
                         name: action.payload.name,
                         description: action.payload.description,
                         status: action.payload.status,
+                        statusText: action.payload.status ? 'Activo' : 'Inactivo',
                         createdAt: action.payload.createdAt,
                     },
                 ],

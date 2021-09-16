@@ -1,18 +1,63 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import DashBoard from '../../Components/DashBoard';
 import WelcomeBanner from '../../Components/WelcomeBanner/index';
 import Search from '../../Components/Search';
 
-import TablePaymentTypes from './TablePaymentTypes';
+import DataCRUD from '../../Components/DataCRUD';
 import { paymentTypes } from '../../redux/selectors';
+
+import PaymentTypeForm from '../../Components/PaymentTypeForm';
+import DeleteForm from './DeleteForm';
+
+import { addPaymentType, updatePaymentType } from '../../redux/PaymentTypes/paymentTypes.actions';
+
+const columnsModel = [
+    {
+        name: 'Nombre',
+        selector: (row) => row?.name,
+        sortable: true,
+    },
+    {
+        name: 'Descripción',
+        selector: (row) => row?.description,
+        sortable: true,
+    },
+    {
+        name: 'Estado',
+        selector: (row) => row?.statusText,
+        sortable: true,
+        conditionalCellStyles: [
+            {
+                when: (row) => row.status === true,
+                classNames: ['text-green-400'],
+            },
+            {
+                when: (row) => row.status === false,
+                classNames: ['text-red-500'],
+            },
+        ],
+    },
+    {
+        name: 'Fecha de creación',
+        selector: (row) => row?.createdAt,
+        sortable: true,
+    },
+];
 
 export default function PaymentTypes() {
     const paymentTypeState = useSelector(paymentTypes);
     const PAYMENT_TYPES = paymentTypeState.types;
     const [searchData, setSearchData] = useState(paymentTypeState.types);
+    const dispatch = useDispatch();
 
+    const handleAddSubmit = (id = 0, name, description, status) => {
+        dispatch(addPaymentType({ id, name, description, status }));
+    };
+    const handleEditSubmit = (id, name, description, status) => {
+        dispatch(updatePaymentType({ id, name, description, status }));
+    };
     const handleSearch = (text) => {
         setSearchData((prev) =>
             prev.filter((u) => u.name.toLowerCase().includes(text.toLowerCase())),
@@ -37,7 +82,15 @@ export default function PaymentTypes() {
                     initialData={PAYMENT_TYPES}
                 />
             </div>
-            <TablePaymentTypes data={searchData} />
+            <DataCRUD
+                title="Metódos de pago"
+                data={searchData}
+                columns={columnsModel}
+                form={PaymentTypeForm}
+                removeForm={DeleteForm}
+                add={handleAddSubmit}
+                update={handleEditSubmit}
+            />
         </DashBoard>
     );
 }

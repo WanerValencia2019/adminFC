@@ -1,24 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import DashBoard from '../../Components/DashBoard';
 import WelcomeBanner from '../../Components/WelcomeBanner/index';
 import Search from '../../Components/Search';
 
-import TableStateServices from './TableStateServices';
+import DataCRUD from '../../Components/DataCRUD';
+
+import StateServiceForm from '../../Components/StateServiceForm';
+import DeleteForm from './DeleteForm';
+
 import { stateServices } from '../../redux/selectors';
+
+import {
+    addStateServices,
+    updateStateServices,
+} from '../../redux/StateServices/stateServices.actions';
+
+const columnsModel = [
+    {
+        name: 'Nombre',
+        selector: (row) => row?.name,
+        sortable: true,
+    },
+    {
+        name: 'Descripción',
+        selector: (row) => row?.description,
+        sortable: true,
+    },
+    {
+        name: 'Fecha de creación',
+        selector: (row) => row?.createdAt,
+        sortable: true,
+    },
+];
 
 function StateServices() {
     const stateSV = useSelector(stateServices);
     const STATES = stateSV.states;
     const [searchData, setSearchData] = useState(stateSV.states);
+    const dispatch = useDispatch();
 
     const handleSearch = (text) => {
         setSearchData((prev) =>
             prev.filter((u) => u.name.toLowerCase().includes(text.toLowerCase())),
         );
     };
-
+    const handleAddSubmit = (id = 0, name, description) => {
+        dispatch(addStateServices({ id, name, description }));
+    };
+    const handleEditSubmit = (id, name, description) => {
+        dispatch(updateStateServices({ id, name, description }));
+    };
     useEffect(() => {}, [stateSV]);
 
     return (
@@ -37,7 +70,15 @@ function StateServices() {
                     initialData={STATES}
                 />
             </div>
-            <TableStateServices data={searchData} />
+            <DataCRUD
+                title="Estados del servicio"
+                data={searchData}
+                columns={columnsModel}
+                form={StateServiceForm}
+                removeForm={DeleteForm}
+                add={handleAddSubmit}
+                update={handleEditSubmit}
+            />
         </DashBoard>
     );
 }
