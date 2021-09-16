@@ -1,17 +1,41 @@
 import React, { useState, useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
+
 import DashBoard from '../../Components/DashBoard';
 import WelcomeBanner from '../../Components/WelcomeBanner/index';
 import Search from '../../Components/Search';
 
-import Table from '../../Components/Table';
+import DataCRUD from '../../Components/DataCRUD';
 
 import UserForm from '../../Components/UserForm';
 import DeleteForm from './DeleteForm';
 
 import { listUsers } from '../../redux/selectors';
 import { addUser, updateUser } from '../../redux/Users/users.actions';
+
+const columnsModel = [
+    {
+        name: 'Usuario',
+        selector: (row) => row?.username,
+        sortable: true,
+    },
+    {
+        name: 'Nombre',
+        selector: (row) => row?.name,
+        sortable: true,
+    },
+    {
+        name: 'Apellidos',
+        selector: (row) => row?.lastName,
+        sortable: true,
+    },
+    {
+        name: 'Fecha de creación',
+        selector: (row) => row?.createdAt,
+        sortable: true,
+    },
+];
 
 function Users() {
     const userState = useSelector(listUsers);
@@ -54,12 +78,12 @@ function Users() {
                     data={searchData}
                     setData={setSearchData}
                     initialData={users}
-                    u
                 />
             </div>
-            <Table
-                headers={tableHeaders}
+            <DataCRUD
+                title="Usuarios"
                 data={searchData}
+                columns={columnsModel}
                 form={UserForm}
                 removeForm={DeleteForm}
                 add={handleAddSubmit}

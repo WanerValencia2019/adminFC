@@ -10,6 +10,7 @@
         "react/jsx-filename-extension": "off",
         "react/prop-types": "off",
         "comma-dangle": "off",
+        "no-unused-vars": "off",
         "prettier/prettier": [
             "error",
             {
