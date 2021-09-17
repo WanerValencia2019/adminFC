@@ -36,7 +36,7 @@ const reducer = (state = initialState, action) => {
         case ActionTypes.DELETE_INTEREST_SUCCESS:
             return { ...state, interests: action.payload.interests };
         case ActionTypes.UPDATE_INTEREST_SUCCESS:
-            return { ...state, interests: action.payload.interests };
+            return { ...state, interests: [...action.payload.interests] };
         default:
             return state;
     }

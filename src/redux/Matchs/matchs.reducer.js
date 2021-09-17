@@ -29,6 +29,7 @@ const reducer = (state = initialState, action) => {
                         userId: action.payload.userId,
                         userMatchId: action.payload.userMatchId,
                         matched: action.payload.matched,
+                        matchedText: action.payload.matched ? 'SI' : 'NO',
                         matchedAt: action.payload.matchedAt,
                         createdAt: action.payload.createdAt,
                     },
@@ -37,7 +38,7 @@ const reducer = (state = initialState, action) => {
         case ActionTypes.DELETE_MATCH_SUCCESS:
             return { ...state, matchs: action.payload.matchs };
         case ActionTypes.UPDATE_MATCH_SUCCESS:
-            return { ...state, matchs: action.payload.matchs };
+            return { ...state, matchs: [...action.payload.matchs] };
         default:
             return state;
     }

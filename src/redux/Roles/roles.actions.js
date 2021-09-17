@@ -36,6 +36,7 @@ export const updateRol =
             name,
             description,
             status,
+            statusText: status ? 'Activo' : 'Inactivo',
         };
         const index = prevState().rolesUser.roles.findIndex((r) => r.id === id);
         const { roles } = prevState().rolesUser;

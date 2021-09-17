@@ -36,7 +36,7 @@ const reducer = (state = initialState, action) => {
         case ActionTypes.DELETE_PAYMENT_TYPE_SUCCESS:
             return { ...state, types: action.payload.types };
         case ActionTypes.UPDATE_PAYMENT_TYPE_SUCCESS:
-            return { ...state, types: action.payload.types };
+            return { ...state, types: [...action.payload.types] };
         default:
             return state;
     }

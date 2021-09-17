@@ -36,7 +36,7 @@ const reducer = (state = initialState, action) => {
         case ActionTypes.DELETE_ROLE_SUCCESS:
             return { ...state, roles: action.payload.roles };
         case ActionTypes.UPDATE_ROLE_SUCCESS:
-            return { ...state, roles: action.payload.roles };
+            return { ...state, roles: [...action.payload.roles] };
         default:
             return state;
     }

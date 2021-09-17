@@ -36,6 +36,7 @@ export const updateMatch =
             userId,
             userMatchId,
             matched,
+            matchedText: matched ? 'SI' : 'NO',
             matchedAt,
         };
         const index = prevState().matchs.matchs.findIndex((r) => r.id === id);

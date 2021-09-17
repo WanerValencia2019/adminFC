@@ -65,7 +65,9 @@ function Users() {
         dispatch(updateUser(id, name, lastName, email, description));
     };
 
-    useEffect(() => {}, [userState]);
+    useEffect(() => {
+        setSearchData(userState.users);
+    }, [userState.users]);
 
     return (
         <DashBoard>

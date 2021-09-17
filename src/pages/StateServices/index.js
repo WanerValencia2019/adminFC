@@ -52,7 +52,9 @@ function StateServices() {
     const handleEditSubmit = (id, name, description) => {
         dispatch(updateStateServices({ id, name, description }));
     };
-    useEffect(() => {}, [stateSV]);
+    useEffect(() => {
+        setSearchData(stateSV.states);
+    }, [stateSV.states]);
 
     return (
         <DashBoard>

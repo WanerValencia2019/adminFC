@@ -36,6 +36,7 @@ export const updatePaymentType =
             name,
             description,
             status,
+            statusText: status ? 'Activo' : 'Inactivo',
         };
         const index = prevState().paymentTypes.types.findIndex((r) => r.id === id);
         const { types } = prevState().paymentTypes;

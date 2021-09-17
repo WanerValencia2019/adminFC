@@ -36,6 +36,7 @@ export const updateInterest =
             name,
             description,
             status,
+            statusText: status ? 'Activo' : 'Inactivo',
         };
         const index = prevState().interest.interests.findIndex((r) => r.id === id);
         const { interests } = prevState().interest;

@@ -64,7 +64,9 @@ export default function PaymentTypes() {
         );
     };
 
-    useEffect(() => {}, [paymentTypeState]);
+    useEffect(() => {
+        setSearchData(paymentTypeState.types);
+    }, [paymentTypeState.types]);
 
     return (
         <DashBoard>

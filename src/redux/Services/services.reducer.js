@@ -33,7 +33,7 @@ const reducer = (state = initialState, action) => {
         case ActionTypes.DELETE_SERVICES_SUCCESS:
             return { ...state, services: action.payload.services };
         case ActionTypes.UPDATE_SERVICES_SUCCESS:
-            return { ...state, services: action.payload.services };
+            return { ...state, services: [...action.payload.services] };
         default:
             return state;
     }

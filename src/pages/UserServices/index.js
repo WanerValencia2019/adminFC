@@ -59,7 +59,9 @@ function UserServices() {
         );
     };
 
-    useEffect(() => {}, [userServiceState]);
+    useEffect(() => {
+        setSearchData(userServiceState.services);
+    }, [userServiceState.services]);
 
     const handleAddSubmit = (
         id,

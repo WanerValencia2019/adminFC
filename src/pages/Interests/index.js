@@ -65,6 +65,10 @@ export default function Interest() {
         );
     };
 
+    useEffect(() => {
+        setSearchData(interestState.interests);
+    }, [interestState.interests]);
+
     return (
         <DashBoard>
             <WelcomeBanner>

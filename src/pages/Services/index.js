@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import DashBoard from '../../Components/DashBoard';
@@ -38,11 +38,14 @@ function Services() {
     const [searchData, setSearchData] = useState(serviceState.services);
     const dispatch = useDispatch();
 
-    const handleSearch = (text) => {
-        setSearchData((prev) =>
-            prev.filter((u) => u.name.toLowerCase().includes(text.toLowerCase())),
-        );
-    };
+    const handleSearch = useMemo(
+        () => (text) => {
+            setSearchData((prev) =>
+                prev.filter((u) => u.name.toLowerCase().includes(text.toLowerCase())),
+            );
+        },
+        [searchData],
+    );
     const handleAddSubmit = (id = 0, name, description) => {
         dispatch(addServices({ id, name, description }));
     };
@@ -50,7 +53,9 @@ function Services() {
         dispatch(updateServices({ id, name, description }));
     };
 
-    useEffect(() => {}, [serviceState]);
+    useEffect(() => {
+        setSearchData(serviceState.services);
+    }, [serviceState.services]);
 
     return (
         <DashBoard>

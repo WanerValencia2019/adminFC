@@ -66,7 +66,9 @@ function Roles() {
         );
     };
 
-    useEffect(() => {}, [roleState]);
+    useEffect(() => {
+        setSearchData(roleState.roles);
+    }, [roleState.roles]);
 
     return (
         <DashBoard>

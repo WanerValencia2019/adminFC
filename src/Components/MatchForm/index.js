@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+
 import React, { useState } from 'react';
 
 import { useSelector } from 'react-redux';
@@ -10,14 +11,18 @@ export default function UserServiceForm({ data, cancel, confirm }) {
     const [userId, setUserId] = useState(data?.userId || 0);
     const [userMatchId, setUserMatchId] = useState(data?.userMatchId || 0);
     const [matchedAt, setMatchedAt] = useState(data?.matchedAt || new Date().toISOString());
-    const [matched, setMatched] = useState(data?.matched || false);
+    const [matched, setMatched] = useState(data?.matched ? 'SI' : 'NO');
 
-    // console.log(dateService)
+    const showStatusMatch = {
+        SI: true,
+        NO: false,
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const id = data?.id || 0;
-        confirm(id, userId, userMatchId, matched, matchedAt);
+        const statusMatched = showStatusMatch[matched];
+        confirm(id, userId, userMatchId, statusMatched, matchedAt);
         cancel();
     };
 
@@ -97,10 +102,10 @@ export default function UserServiceForm({ data, cancel, confirm }) {
                                             autoComplete="country"
                                             className="mt-1  block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                             value={matched}
-                                            onChange={(e) => setMatched(Boolean(e.target.value))}
+                                            onChange={(e) => setMatched(e.target.value)}
                                         >
-                                            <option value>Si</option>
-                                            <option value={false}>No</option>
+                                            <option value="SI">Si</option>
+                                            <option value="NO">No</option>
                                         </select>
                                     </div>
                                     <div className="col-span-10 sm:col-span-12 mt-3">

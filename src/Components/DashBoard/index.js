@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Sidebar from '../SideBar';
 import Header from '../SiteHeader';
 
 function Dashboard({ children }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-
+    useEffect(() => {}, [children]);
     return (
         <div className="flex h-screen overflow-hidden">
             {/* Sidebar */}
