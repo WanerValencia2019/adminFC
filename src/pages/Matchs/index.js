@@ -88,7 +88,7 @@ export default function Matchs() {
                 />
             </div>
             <DataCRUD
-                title="Metódos de pago"
+                title="Coincidencias"
                 data={searchData}
                 columns={columnsModel}
                 form={MatchForm}

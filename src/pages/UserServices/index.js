@@ -14,6 +14,8 @@ import { addUserServices, updateUserServices } from '../../redux/UserServices/us
 
 import { userServices } from '../../redux/selectors';
 
+import { formatValue } from '../../utils/Utils';
+
 const columnsModel = [
     {
         name: 'Usuario',
@@ -32,6 +34,7 @@ const columnsModel = [
     },
     {
         name: 'Valor',
+        cell: (row) => <td>{formatValue(row?.value)}</td>,
         selector: (row) => row?.value,
         sortable: true,
     },
