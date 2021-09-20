@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-//reducers
+// reducers
 import userReducer from './Users/users.reducer';
 import rolesReducer from './Roles/roles.reducer';
 import interestsReducer from './Interests/interests.reducer';
@@ -9,12 +9,10 @@ import stateServicesReducer from './StateServices/stateServices.reducer';
 import userServicesReducer from './UserServices/userServices.reducer';
 import matchsReducer from './Matchs/matchs.reducer';
 import paymentTypesReducer from './PaymentTypes/paymentTypes.reducer';
-
-
-
+import transactionsReducer from './Transactions/transactions.reducer';
 
 const rootReducer = combineReducers({
-    listUsers:userReducer,
+    listUsers: userReducer,
     rolesUser: rolesReducer,
     interest: interestsReducer,
     services: servicesReducer,
@@ -22,6 +20,7 @@ const rootReducer = combineReducers({
     userServices: userServicesReducer,
     matchs: matchsReducer,
     paymentTypes: paymentTypesReducer,
+    transactions: transactionsReducer,
 });
 
 export default rootReducer;
