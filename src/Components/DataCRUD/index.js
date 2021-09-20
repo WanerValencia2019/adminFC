@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import DataTable from 'react-data-table-component';
 
-import { TrashIcon, PencilAltIcon } from '@heroicons/react/outline';
+import { TrashIcon, PencilAltIcon, PlusIcon } from '@heroicons/react/outline';
 import { PlusCircleIcon } from '@heroicons/react/solid';
 
 import Modal from '../Modal';
@@ -26,10 +26,14 @@ const renderHeader = (title, create) => (
     <div className="px-5 py-4 border-b border-gray-100  ">
         <div className="flex flex-column justify-between">
             <p className="font-semibold text-gray-800 font-sm">{title}</p>
-            <PlusCircleIcon
+            <button
+                type="button"
                 onClick={() => create()}
-                className="h-10 w-10 text-blue-500 cursor-pointer"
-            />
+                className="text-blue-500 hover:bg-blue-600 hover:text-white flex justify-center items-center  cursor-pointer p-1 rounded shadow"
+            >
+                <PlusCircleIcon className="h-10 w-10" />
+                <p className="text-sm">Añadir</p>
+            </button>
         </div>
     </div>
 );
