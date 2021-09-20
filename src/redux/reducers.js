@@ -9,6 +9,7 @@ import stateServicesReducer from './StateServices/stateServices.reducer';
 import userServicesReducer from './UserServices/userServices.reducer';
 import matchsReducer from './Matchs/matchs.reducer';
 import paymentTypesReducer from './PaymentTypes/paymentTypes.reducer';
+import transactionsReducer from './Transactions/transactions.reducer';
 
 const rootReducer = combineReducers({
     listUsers: userReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     userServices: userServicesReducer,
     matchs: matchsReducer,
     paymentTypes: paymentTypesReducer,
+    transactions: transactionsReducer,
 });
 
 export default rootReducer;

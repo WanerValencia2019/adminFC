@@ -18,6 +18,7 @@ import StateServices from './pages/StateServices';
 import UserServices from './pages/UserServices';
 import Matchs from './pages/Matchs';
 import PaymentTypes from './pages/PaymentTypes';
+import Transactions from './pages/Transactions';
 
 function App() {
     const location = useLocation();
@@ -58,6 +59,9 @@ function App() {
                 </Route>
                 <Route exact path="/paymentTypes">
                     <PaymentTypes />
+                </Route>
+                <Route exact path="/transactions">
+                    <Transactions />
                 </Route>
             </Switch>
         </>

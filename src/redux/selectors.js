@@ -6,3 +6,4 @@ export const stateServices = (state) => state.stateServices;
 export const userServices = (state) => state.userServices;
 export const matchs = (state) => state.matchs;
 export const paymentTypes = (state) => state.paymentTypes;
+export const transactions = (state) => state.transactions;
