@@ -11,6 +11,7 @@ import './charts/ChartjsConfig';
 // Import pages
 import Home from './pages/Home';
 import Users from './pages/Users';
+import UserDetail from './pages/UserDetail';
 import Roles from './pages/Roles';
 import Interests from './pages/Interests';
 import Services from './pages/Services';
@@ -38,6 +39,9 @@ function App() {
                 </Route>
                 <Route exact path="/users">
                     <Users />
+                </Route>
+                <Route path="/users/:id">
+                    <UserDetail />
                 </Route>
                 <Route exact path="/users-roles">
                     <Roles />
