@@ -1,18 +1,26 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 export default function UserForm({ data, cancel, confirm }) {
-    const [name, setName] = useState(data?.name || '');
-    const [status, setStatus] = useState(data?.status || 'inactive');
-    const [description, setDescription] = useState(data?.description || '');
+    const defaultValues = {
+        name: data?.name || '',
+        description: data?.description || '',
+        status: 'active',
+    };
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+    } = useForm({ defaultValues });
 
     const showStatus = {
         active: true,
         inactive: false,
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = (values) => {
+        const { name, description, status } = values;
         const id = data?.id || 0;
         const st = showStatus[status];
 
@@ -34,7 +42,7 @@ export default function UserForm({ data, cancel, confirm }) {
                             </p>
                         </div>
                     </div>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="shadow overflow-hidden sm:rounded-md">
                             <div className="px-4 py-5 bg-white sm:p-6">
                                 <div className="grid grid-cols-10 gap-2">
@@ -51,8 +59,7 @@ export default function UserForm({ data, cancel, confirm }) {
                                             id="first-name"
                                             autoComplete="given-name"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
+                                            {...register('name', { required: true })}
                                         />
                                     </div>
                                     <div className="col-span-10 sm:col-span-10">
@@ -68,8 +75,7 @@ export default function UserForm({ data, cancel, confirm }) {
                                             id="description"
                                             autoComplete="description"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                            value={description}
-                                            onChange={(e) => setDescription(e.target.value)}
+                                            {...register('description', { required: true })}
                                         />
                                     </div>
                                     <div className="col-span-5 sm:col-span-5">
@@ -84,8 +90,7 @@ export default function UserForm({ data, cancel, confirm }) {
                                             name="country"
                                             autoComplete="country"
                                             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            value={status}
-                                            onChange={(e) => setStatus(e.target.value)}
+                                            {...register('status', { required: true })}
                                         >
                                             <option value="active">Activo</option>
                                             <option value="inactive">Inactivo</option>
