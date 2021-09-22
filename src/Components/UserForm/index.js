@@ -1,14 +1,30 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 export default function UserForm({ data, cancel, confirm }) {
-    const [name, setName] = useState(data?.name || '');
-    const [email, setEmail] = useState(data?.email || '');
-    const [lastName, setLastName] = useState(data?.lastName || '');
-    const [description, setDescription] = useState(data?.description || '');
+    const defaultValues = {
+        name: data?.name || '',
+        email: data?.email || '',
+        lastName: data?.lastName || '',
+        firstName: data?.firstName || '',
+        password: '',
+        passwordConfirm: '',
+        description: data?.description || '',
+    };
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+    } = useForm({ defaultValues });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const showStatus = {
+        active: true,
+        inactive: false,
+    };
+
+    const onSubmit = (values) => {
+        const { name, lastName, email, description } = values;
         const id = data?.id || 0;
         confirm(id, name, lastName, email, description);
         cancel();
@@ -26,7 +42,7 @@ export default function UserForm({ data, cancel, confirm }) {
                             </p>
                         </div>
                     </div>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="shadow overflow-hidden sm:rounded-md">
                             <div className="px-4 py-5 bg-white sm:p-6">
                                 <h5 className="text-md font-medium leading-4 text-gray-800">
@@ -44,10 +60,14 @@ export default function UserForm({ data, cancel, confirm }) {
                                             type="text"
                                             name="first-name"
                                             id="first-name"
-                                            autoComplete="given-name"
+                                            autoComplete="first-name"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
+                                            {...register('firstName', {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Este campo es requerido',
+                                                },
+                                            })}
                                         />
                                     </div>
 
@@ -62,10 +82,14 @@ export default function UserForm({ data, cancel, confirm }) {
                                             type="text"
                                             name="last-name"
                                             id="last-name"
-                                            autoComplete="family-name"
+                                            autoComplete="last-name"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                            value={lastName}
-                                            onChange={(e) => setLastName(e.target.value)}
+                                            {...register('lastName', {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Este campo es requerido',
+                                                },
+                                            })}
                                         />
                                     </div>
                                     <div className="col-span-6 sm:col-span-3">
@@ -81,13 +105,17 @@ export default function UserForm({ data, cancel, confirm }) {
                                             id="email-address"
                                             autoComplete="email"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
+                                            {...register('email', {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Este campo es requerido',
+                                                },
+                                            })}
                                         />
                                     </div>
                                     <div className="col-span-6 sm:col-span-6">
                                         <label
-                                            htmlFor="email-address"
+                                            htmlFor="description"
                                             className="block text-sm font-medium text-gray-600"
                                         >
                                             Descripción
@@ -98,8 +126,12 @@ export default function UserForm({ data, cancel, confirm }) {
                                             id="description"
                                             autoComplete="description"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                            value={description}
-                                            onChange={(e) => setDescription(e.target.value)}
+                                            {...register('description', {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Este campo es requerido',
+                                                },
+                                            })}
                                         />
                                     </div>
                                 </div>
@@ -120,45 +152,61 @@ export default function UserForm({ data, cancel, confirm }) {
                                             id="username"
                                             autoComplete="username"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
+                                            {...register('name', {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Este campo es requerido',
+                                                },
+                                            })}
                                         />
                                     </div>
                                     <br />
-                                    <div className="col-span-6 sm:col-span-3">
-                                        <label
-                                            htmlFor="email-address"
-                                            className="block text-sm font-medium text-gray-600"
-                                        >
-                                            Contraseña
-                                        </label>
-                                        <input
-                                            type="password"
-                                            name="password"
-                                            id="password"
-                                            autoComplete="password"
-                                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                        />
-                                    </div>
-                                    <div className="col-span-6 sm:col-span-3">
-                                        <label
-                                            htmlFor="email-address"
-                                            className="block text-sm font-medium text-gray-600"
-                                        >
-                                            Confirmar contraseña
-                                        </label>
-                                        <input
-                                            type="password"
-                                            name="password-confirm"
-                                            id="password-confirm"
-                                            autoComplete="password-confirm"
-                                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                        />
-                                    </div>
+                                    {!data && (
+                                        <>
+                                            <div className="col-span-6 sm:col-span-3">
+                                                <label
+                                                    htmlFor="email-address"
+                                                    className="block text-sm font-medium text-gray-600"
+                                                >
+                                                    Contraseña
+                                                </label>
+                                                <input
+                                                    type="password"
+                                                    name="password"
+                                                    id="password"
+                                                    autoComplete="password"
+                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                    {...register('password', {
+                                                        required: {
+                                                            value: true,
+                                                            message: 'Este campo es requerido',
+                                                        },
+                                                    })}
+                                                />
+                                            </div>
+                                            <div className="col-span-6 sm:col-span-3">
+                                                <label
+                                                    htmlFor="email-address"
+                                                    className="block text-sm font-medium text-gray-600"
+                                                >
+                                                    Confirmar contraseña
+                                                </label>
+                                                <input
+                                                    type="password"
+                                                    name="password-confirm"
+                                                    id="password-confirm"
+                                                    autoComplete="password-confirm"
+                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                    {...register('passwordConfirm', {
+                                                        required: {
+                                                            value: true,
+                                                            message: 'Este campo es requerido',
+                                                        },
+                                                    })}
+                                                />
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                                 <h5 className="text-md font-medium leading-4 text-gray-800">
                                     Dirección
@@ -176,6 +224,12 @@ export default function UserForm({ data, cancel, confirm }) {
                                             name="country"
                                             autoComplete="country"
                                             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                            {...register('country', {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Este campo es requerido',
+                                                },
+                                            })}
                                         >
                                             <option>Chile</option>
                                             <option>United States</option>
@@ -210,6 +264,12 @@ export default function UserForm({ data, cancel, confirm }) {
                                             id="street-address"
                                             autoComplete="street-address"
                                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                            {...register('streetAddress', {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Este campo es requerido',
+                                                },
+                                            })}
                                         />
                                     </div>
                                 </div>
@@ -229,6 +289,12 @@ export default function UserForm({ data, cancel, confirm }) {
                                             name="active"
                                             autoComplete="active"
                                             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                            {...register('status', {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Este campo es requerido',
+                                                },
+                                            })}
                                         >
                                             <option className="text-green-700">Activo</option>
                                             <option className="text-yellow-500">Inactivo</option>
@@ -248,6 +314,12 @@ export default function UserForm({ data, cancel, confirm }) {
                                             name="roles"
                                             autoComplete="roles"
                                             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                            {...register('roles', {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Este campo es requerido',
+                                                },
+                                            })}
                                         >
                                             <option>Cliente</option>
                                             <option>Administrador</option>
