@@ -1,16 +1,28 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable  react/no-unescaped-entities */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
+
 import { Disclosure } from '@headlessui/react';
-import { ChevronUpIcon } from '@heroicons/react/solid';
+import { ChevronUpIcon, ArrowLeftIcon } from '@heroicons/react/solid';
 
 import DashBoard from '../../Components/DashBoard';
+import WelcomeBanner from '../../Components/WelcomeBanner/index';
 
 import UserForm from '../../Components/UserForm';
+
+import { listUsers } from '../../redux/selectors';
 
 // import DeleteForm from './DeleteForm';
 
 export default function UserDetail({ data, cancel, confirm }) {
+    const params = useParams();
+    const history = useHistory();
+
+    const users = useSelector(listUsers);
+
     const [name, setName] = useState(data?.name || '');
     const [email, setEmail] = useState(data?.email || '');
     const [lastName, setLastName] = useState(data?.lastName || '');
@@ -18,25 +30,25 @@ export default function UserDetail({ data, cancel, confirm }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        const id = data?.id || 0;
-        confirm(id, name, lastName, email, description);
+        const userId = data?.id || 0;
+        confirm(userId, name, lastName, email, description);
         cancel();
     };
     return (
         <DashBoard>
+            <WelcomeBanner>
+                <h1 className="text-2xl md:text-3xl text-gray-800 font-bold mb-1">
+                    Usuario - {data ? data.name : 'Nuevo'}
+                </h1>
+            </WelcomeBanner>
             <div className="grid grid-cols-6 flex flex-row shadow overflow-hidden bg-white p-3">
-                <div className="col-span-6 sm:col-span-5">
-                    <div className="flex flex-row justify-between">
-                        <button
-                            className="shadow-sm p-2 text-lg font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            type="button"
-                        >
-                            Regresar
-                        </button>
-                        <h4 className="leading-4 text-black">Usuario - Nuevo</h4>
+                <div className="col-span-2 lg:col-span-1 ">
+                    <div className="flex flex-row items-center text-blue-500 cursor-pointer">
+                        <ArrowLeftIcon onClick={() => history.push('/users')} className="h-6 w-6" />
                     </div>
                 </div>
-                <div className="w-full  px-4 pt-3 col-span-4 sm:col-span-5">
+                <br />
+                <div className="w-full  px-4 pt-3 col-span-6 sm:col-span-5">
                     <div className="w-full  p-2 mx-auto bg-white rounded-2xl">
                         <Disclosure as="div" className="mt-2">
                             {({ open }) => (
@@ -325,8 +337,8 @@ export default function UserDetail({ data, cancel, confirm }) {
                         </Disclosure>
                     </div>
                 </div>
-                <div className="col-span-1 mt-8 sm:col-span-1">
-                    <div className=" flex flex-col bg-gray-50 text-right sm:px-6 ">
+                <div className="col-span-6 sm:col-span-4 md:col-span-4 lg:col-span-1 mt-8 ">
+                    <div className=" flex flex-col bg-gray-50 text-right sm:px-6 px-6">
                         <button
                             type="submit"
                             className="justify-center py-2 px-4 border  shadow-sm text-lg font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Disclosure } from '@headlessui/react';
+import { ChevronUpIcon, ArrowLeftIcon } from '@heroicons/react/solid';
 
 export default function UserForm({ data, cancel, confirm }) {
     const defaultValues = {

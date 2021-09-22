@@ -11,8 +11,8 @@ export default function UserServiceForm({ data, cancel, confirm }) {
     const userState = useSelector(listUsers).users;
 
     const defaultValues = {
-        userId: data?.userId || userState[0].id || 0,
-        userMatchId: data?.userMatchId || userState[0].id || 0,
+        userId: data?.userId || userState[0]?.id || 0,
+        userMatchId: data?.userMatchId || userState[0]?.id || 0,
         matchedAt: data?.matchedAt || new Date().toISOString(),
         matched: data?.matched ? 'SI' : 'NO',
     };
