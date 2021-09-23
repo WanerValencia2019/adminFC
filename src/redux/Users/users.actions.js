@@ -1,7 +1,7 @@
 import ActionTypes from '../actionTypes';
 
 export const addUser =
-    (id = 0, name, lastName, email, description) =>
+    ({ id = 0, username, name, lastName, email, description }) =>
     (dispatch, prevState) => {
         // eslint-disable-next-line no-unused-vars
         const sum = id + 0;
@@ -10,7 +10,7 @@ export const addUser =
             type: ActionTypes.ADD_USER_SUCCESS,
             payload: {
                 id: count + 1,
-                username: name + lastName,
+                username,
                 name,
                 lastName,
                 description,

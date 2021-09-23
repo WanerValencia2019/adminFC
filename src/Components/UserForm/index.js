@@ -68,7 +68,8 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="username"
                                                     autoComplete="username"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                    {...register('name')}
+                                                    defaultValue="Hola mundo"
+                                                    {...register('username')}
                                                 />
                                             </div>
                                             <br />
@@ -85,6 +86,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="password"
                                                     autoComplete="password"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                    defaultValue="test"
                                                     {...register('password')}
                                                 />
                                             </div>
@@ -101,8 +103,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="password-confirm"
                                                     autoComplete="password-confirm"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    {...register('passwordConfirm')}
                                                 />
                                             </div>
                                         </div>
@@ -136,8 +137,8 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="first-name"
                                                     autoComplete="given-name"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                    value={name}
-                                                    onChange={(e) => setName(e.target.value)}
+                                                    defaultValue="test"
+                                                    {...register('name')}
                                                 />
                                             </div>
 
@@ -154,8 +155,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="last-name"
                                                     autoComplete="family-name"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                    value={lastName}
-                                                    onChange={(e) => setLastName(e.target.value)}
+                                                    {...register('lastName')}
                                                 />
                                             </div>
                                             <div className="col-span-6 sm:col-span-3">
@@ -171,8 +171,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="email-address"
                                                     autoComplete="email"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    {...register('email')}
                                                 />
                                             </div>
                                             <div className="col-span-6 sm:col-span-6">
@@ -188,8 +187,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="description"
                                                     autoComplete="description"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                    value={description}
-                                                    onChange={(e) => setDescription(e.target.value)}
+                                                    {...register('description')}
                                                 />
                                             </div>
                                         </div>
@@ -288,6 +286,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     name="active"
                                                     autoComplete="active"
                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                    {...register('status')}
                                                 >
                                                     <option className="text-green-700">
                                                         Activo
@@ -313,6 +312,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     name="roles"
                                                     autoComplete="roles"
                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                    {...register('roles')}
                                                 >
                                                     <option>Cliente</option>
                                                     <option>Administrador</option>

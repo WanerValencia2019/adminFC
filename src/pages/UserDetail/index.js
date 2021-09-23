@@ -3,7 +3,7 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
 import { Disclosure } from '@headlessui/react';
@@ -15,25 +15,28 @@ import WelcomeBanner from '../../Components/WelcomeBanner/index';
 import UserForm from '../../Components/UserForm';
 
 import { listUsers } from '../../redux/selectors';
-
+import { addUser, updateUser } from '../../redux/Users/users.actions';
 // import DeleteForm from './DeleteForm';
 
 export default function UserDetail({ cancel, confirm }) {
     const params = useParams();
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [data, setData] = useState(null);
     const { users } = useSelector(listUsers);
 
     useLayoutEffect(() => {
-        setData(users.filter((user) => user.id === params?.id));
+        setData(users.filter((user) => user.id === Number(params?.id)));
     }, []);
 
+    console.log(data);
+    console.log(params);
     const defaultValues = {
-        name: data?.name || '',
+        username: data?.username || '',
         email: data?.email || '',
         lastName: data?.lastName || '',
-        firstName: data?.firstName || '',
+        name: data?.name || '',
         password: '',
         passwordConfirm: '',
         description: data?.description || '',
@@ -45,11 +48,10 @@ export default function UserDetail({ cancel, confirm }) {
     } = useForm({ defaultValues });
 
     const onSubmit = (values) => {
+        const { username, email, name, lastName, description } = values;
         console.log(values);
-        // e.preventDefault();
-        // const userId = data?.id || 0;
-        // confirm(userId, name, lastName, email, description);
-        // cancel();
+        const id = data?.id || 0;
+        dispatch(addUser({ id, username, name, lastName, email, description }));
     };
     return (
         <DashBoard>

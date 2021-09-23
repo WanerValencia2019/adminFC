@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import DataTable from 'react-data-table-component';
+import { useHistory } from 'react-router-dom';
 
 import { TrashIcon, PencilAltIcon, PlusIcon } from '@heroicons/react/outline';
 import { PlusCircleIcon } from '@heroicons/react/solid';
@@ -8,10 +9,11 @@ import { PlusCircleIcon } from '@heroicons/react/solid';
 import Modal from '../Modal';
 
 const renderActions = (row, edit, remove) => {
+    const history = useHistory();
     return (
         <div className="text-lg text-center flex flex-row">
             <PencilAltIcon
-                onClick={() => edit(row)}
+                onClick={() => history.push(`/users/${row?.id}`)}
                 className="h-8 w-8 text-blue-500 cursor-pointer"
             />
             <TrashIcon
