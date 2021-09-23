@@ -4,39 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon, ArrowLeftIcon } from '@heroicons/react/solid';
 
-export default function UserForm({ data, cancel, confirm, register, handleSubmit }) {
-    /* const defaultValues = {
-        name: data?.name || '',
-        email: data?.email || '',
-        lastName: data?.lastName || '',
-        firstName: data?.firstName || '',
-        password: '',
-        passwordConfirm: '',
-        description: data?.description || '',
-    };
-    const {
-        register,
-        formState: { errors },
-        handleSubmit,
-    } = useForm({ defaultValues }); */
-
-    const showStatus = {
-        active: true,
-        inactive: false,
-    };
-    const [name, setName] = useState(data?.name || '');
-    const [email, setEmail] = useState(data?.email || '');
-    const [lastName, setLastName] = useState(data?.lastName || '');
-    const [description, setDescription] = useState(data?.description || '');
-
-    const onSubmit = (values) => {
-        console.log(values);
-        // const { name, lastName, email, description } = values;
-        // const id = data?.id || 0;
-        // confirm(id, name, lastName, email, description);
-        // cancel();
-    };
-
+export default function UserForm({ data, register }) {
     return (
         <div className="shadow overflow-hidden sm:rounded-md">
             <div className="grid grid-cols-6 shadow overflow-hidden bg-white p-3">
@@ -68,44 +36,47 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="username"
                                                     autoComplete="username"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                    defaultValue="Hola mundo"
+                                                    defaultValue={data?.username}
                                                     {...register('username')}
                                                 />
                                             </div>
                                             <br />
-                                            <div className="col-span-6 sm:col-span-3">
-                                                <label
-                                                    htmlFor="email-address"
-                                                    className="block text-sm font-medium text-gray-600"
-                                                >
-                                                    Contraseña
-                                                </label>
-                                                <input
-                                                    type="password"
-                                                    name="password"
-                                                    id="password"
-                                                    autoComplete="password"
-                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                    defaultValue="test"
-                                                    {...register('password')}
-                                                />
-                                            </div>
-                                            <div className="col-span-6 sm:col-span-3">
-                                                <label
-                                                    htmlFor="email-address"
-                                                    className="block text-sm font-medium text-gray-600"
-                                                >
-                                                    Confirmar contraseña
-                                                </label>
-                                                <input
-                                                    type="password"
-                                                    name="password-confirm"
-                                                    id="password-confirm"
-                                                    autoComplete="password-confirm"
-                                                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                    {...register('passwordConfirm')}
-                                                />
-                                            </div>
+                                            {!data && (
+                                                <>
+                                                    <div className="col-span-6 sm:col-span-3">
+                                                        <label
+                                                            htmlFor="email-address"
+                                                            className="block text-sm font-medium text-gray-600"
+                                                        >
+                                                            Contraseña
+                                                        </label>
+                                                        <input
+                                                            type="password"
+                                                            name="password"
+                                                            id="password"
+                                                            autoComplete="password"
+                                                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                            {...register('password')}
+                                                        />
+                                                    </div>
+                                                    <div className="col-span-6 sm:col-span-3">
+                                                        <label
+                                                            htmlFor="email-address"
+                                                            className="block text-sm font-medium text-gray-600"
+                                                        >
+                                                            Confirmar contraseña
+                                                        </label>
+                                                        <input
+                                                            type="password"
+                                                            name="password-confirm"
+                                                            id="password-confirm"
+                                                            autoComplete="password-confirm"
+                                                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                            {...register('passwordConfirm')}
+                                                        />
+                                                    </div>
+                                                </>
+                                            )}
                                         </div>
                                     </Disclosure.Panel>
                                 </>
@@ -137,7 +108,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="first-name"
                                                     autoComplete="given-name"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                    defaultValue="test"
+                                                    defaultValue={data?.name}
                                                     {...register('name')}
                                                 />
                                             </div>
@@ -155,6 +126,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="last-name"
                                                     autoComplete="family-name"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                    defaultValue={data?.lastName}
                                                     {...register('lastName')}
                                                 />
                                             </div>
@@ -171,6 +143,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="email-address"
                                                     autoComplete="email"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                    defaultValue={data?.email}
                                                     {...register('email')}
                                                 />
                                             </div>
@@ -187,6 +160,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     id="description"
                                                     autoComplete="description"
                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                    defaultValue={data?.description}
                                                     {...register('description')}
                                                 />
                                             </div>
@@ -213,7 +187,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     htmlFor="country"
                                                     className="block text-sm font-medium text-gray-600"
                                                 >
-                                                    Country / Region
+                                                    País
                                                 </label>
                                                 <select
                                                     id="country"
@@ -232,7 +206,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     htmlFor="city"
                                                     className="block text-sm font-medium text-gray-600"
                                                 >
-                                                    City
+                                                    Ciudad
                                                 </label>
                                                 <input
                                                     type="text"
@@ -246,7 +220,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     htmlFor="street-address"
                                                     className="block text-sm font-medium text-gray-600"
                                                 >
-                                                    Street address
+                                                    Dirección
                                                 </label>
                                                 <input
                                                     type="text"
@@ -286,6 +260,7 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     name="active"
                                                     autoComplete="active"
                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                    defaultValue={data?.status}
                                                     {...register('status')}
                                                 >
                                                     <option className="text-green-700">
@@ -312,12 +287,13 @@ export default function UserForm({ data, cancel, confirm, register, handleSubmit
                                                     name="roles"
                                                     autoComplete="roles"
                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                    defaultValue={data?.roles}
                                                     {...register('roles')}
                                                 >
-                                                    <option>Cliente</option>
-                                                    <option>Administrador</option>
-                                                    <option>Cliente</option>
-                                                    <option>Cliente</option>
+                                                    <option value="Cliente">Cliente</option>
+                                                    <option value="Administrador">
+                                                        Administrador
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>

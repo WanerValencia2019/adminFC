@@ -15,10 +15,9 @@ import WelcomeBanner from '../../Components/WelcomeBanner/index';
 import UserForm from '../../Components/UserForm';
 
 import { listUsers } from '../../redux/selectors';
-import { addUser, updateUser } from '../../redux/Users/users.actions';
-// import DeleteForm from './DeleteForm';
+import { addUser, updateUser, deleteUser } from '../../redux/Users/users.actions';
 
-export default function UserDetail({ cancel, confirm }) {
+export default function UserDetail() {
     const params = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
@@ -27,31 +26,37 @@ export default function UserDetail({ cancel, confirm }) {
     const { users } = useSelector(listUsers);
 
     useLayoutEffect(() => {
-        setData(users.filter((user) => user.id === Number(params?.id)));
+        setData(users.filter((user) => user.id === Number(params?.id))[0]);
     }, []);
 
     console.log(data);
     console.log(params);
-    const defaultValues = {
-        username: data?.username || '',
-        email: data?.email || '',
-        lastName: data?.lastName || '',
-        name: data?.name || '',
-        password: '',
-        passwordConfirm: '',
-        description: data?.description || '',
-    };
     const {
         register,
         formState: { errors },
         handleSubmit,
-    } = useForm({ defaultValues });
+    } = useForm();
 
-    const onSubmit = (values) => {
+    const create = (values) => {
         const { username, email, name, lastName, description } = values;
         console.log(values);
         const id = data?.id || 0;
         dispatch(addUser({ id, username, name, lastName, email, description }));
+        history.push('/users');
+    };
+
+    const edit = (values) => {
+        const { username, email, name, lastName, description } = values;
+        console.log(values);
+        const id = data?.id;
+        dispatch(updateUser({ id, username, name, lastName, email, description }));
+        history.push('/users');
+    };
+
+    const remove = () => {
+        const id = data?.id;
+        dispatch(deleteUser(id));
+        history.push('/users');
     };
     return (
         <DashBoard>
@@ -68,26 +73,41 @@ export default function UserDetail({ cancel, confirm }) {
                 </div>
                 <br />
                 <div className="w-full  px-4 pt-3 col-span-6 sm:col-span-6">
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={data ? handleSubmit(edit) : handleSubmit(create)}>
                         <div className="grid grid-cols-6 flex flex-row">
                             <div className="col-span-6 sm:col-span-5">
-                                <UserForm handleSubmit={handleSubmit} register={register} />
+                                <UserForm
+                                    data={data}
+                                    handleSubmit={handleSubmit}
+                                    register={register}
+                                />
                             </div>
                             <div className="col-span-6 sm:col-span-4 md:col-span-4 lg:col-span-1 mt-8 ">
                                 <div className=" flex flex-col bg-gray-50 text-right sm:px-6 px-6">
-                                    <button
-                                        type="submit"
-                                        className="justify-center py-2 px-4 border  shadow-sm text-lg font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                    >
-                                        Guardar
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="mt-2 justify-center py-2 px-4 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-red-500 hover:bg-red-700  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                        onClick={() => cancel()}
-                                    >
-                                        Eliminar
-                                    </button>
+                                    {data ? (
+                                        <>
+                                            <button
+                                                type="submit"
+                                                className="justify-center py-2 px-4 border  shadow-sm text-lg font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                            >
+                                                Guardar
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className="mt-2 justify-center py-2 px-4 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-red-500 hover:bg-red-700  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                onClick={() => remove()}
+                                            >
+                                                Eliminar
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <button
+                                            type="submit"
+                                            className="justify-center py-2 px-4 border  shadow-sm text-lg font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        >
+                                            Guardar
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>

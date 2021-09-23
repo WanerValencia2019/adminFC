@@ -84,6 +84,7 @@ function Users() {
                 />
             </div>
             <DataCRUD
+                url="users"
                 title="Usuarios"
                 data={searchData}
                 columns={columnsModel}

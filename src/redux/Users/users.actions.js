@@ -36,22 +36,25 @@ export const deleteUser = (idUser) => (dispatch, prevState) => {
     });
 };
 
-export const updateUser = (id, name, lastName, email, description) => (dispatch, prevState) => {
-    const newData = {
-        name,
-        lastName,
-        description,
-        email,
+export const updateUser =
+    ({ id = 0, username, name, lastName, email, description }) =>
+    (dispatch, prevState) => {
+        const newData = {
+            username,
+            name,
+            lastName,
+            description,
+            email,
+        };
+        const index = prevState().listUsers.users.findIndex((u) => u.id === id);
+        const { users } = prevState().listUsers;
+
+        users[index] = { ...users[index], ...newData };
+
+        return dispatch({
+            type: ActionTypes.UPDATE_USER_SUCCESS,
+            payload: {
+                users,
+            },
+        });
     };
-    const index = prevState().listUsers.users.findIndex((u) => u.id === id);
-    const { users } = prevState().listUsers;
-
-    users[index] = { ...users[index], ...newData };
-
-    return dispatch({
-        type: ActionTypes.UPDATE_USER_SUCCESS,
-        payload: {
-            users,
-        },
-    });
-};

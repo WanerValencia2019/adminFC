@@ -8,12 +8,12 @@ import { PlusCircleIcon } from '@heroicons/react/solid';
 
 import Modal from '../Modal';
 
-const renderActions = (row, edit, remove) => {
+const renderActions = (row, url, remove) => {
     const history = useHistory();
     return (
         <div className="text-lg text-center flex flex-row">
             <PencilAltIcon
-                onClick={() => history.push(`/users/${row?.id}`)}
+                onClick={() => history.push(`/${url}/${row?.id}`)}
                 className="h-8 w-8 text-blue-500 cursor-pointer"
             />
             <TrashIcon
@@ -24,23 +24,37 @@ const renderActions = (row, edit, remove) => {
     );
 };
 
-const renderHeader = (title, create) => (
-    <div className="px-5 py-4 border-b border-gray-100  ">
-        <div className="flex flex-column justify-between">
-            <p className="font-semibold text-gray-800 font-sm">{title}</p>
-            <button
-                type="button"
-                onClick={() => create()}
-                className="text-blue-500 hover:bg-blue-600 hover:text-white flex justify-center items-center  cursor-pointer p-1 rounded shadow"
-            >
-                <PlusCircleIcon className="h-10 w-10" />
-                <p className="text-sm">Añadir</p>
-            </button>
+const renderHeader = (title, url) => {
+    const history = useHistory();
+    return (
+        <div className="px-5 py-4 border-b border-gray-100">
+            <div className="flex flex-column justify-between">
+                <p className="font-semibold text-gray-800 font-sm">{title}</p>
+                <button
+                    type="button"
+                    onClick={() => history.push(`/${url}/create`)}
+                    className="text-blue-500 hover:bg-blue-600 hover:text-white flex justify-center items-center  cursor-pointer p-1 rounded shadow"
+                >
+                    <PlusCircleIcon className="h-10 w-10" />
+                    <p className="text-sm">Añadir</p>
+                </button>
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
-export default function DataCRUD({ title, data, columns, form, removeForm, add, update, remove }) {
+export default function DataCRUD({
+    url,
+    title,
+    data,
+    columns,
+    form,
+    removeForm,
+    add,
+    update,
+    remove,
+}) {
+    const history = useHistory();
     const [showModal, setShowModal] = useState(false);
 
     const [selectedForm, setSelectedForm] = useState(null);
@@ -65,7 +79,7 @@ export default function DataCRUD({ title, data, columns, form, removeForm, add, 
 
     const actions = {
         name: 'Acciones',
-        cell: (row) => renderActions(row, handleEdit, handleDelete),
+        cell: (row) => renderActions(row, url, handleDelete),
         ignoreRowClick: true,
         allowOverflow: true,
         button: true,
@@ -76,7 +90,7 @@ export default function DataCRUD({ title, data, columns, form, removeForm, add, 
     return (
         <div className="col-span-full xl:col-span-6 bg-white shadow-lg rounded-sm border border-gray-200">
             <DataTable
-                title={renderHeader(title, handleCreate)}
+                title={renderHeader(title, url)}
                 customStyles={customStyles}
                 columns={columnsWithActions}
                 data={data}
@@ -87,7 +101,7 @@ export default function DataCRUD({ title, data, columns, form, removeForm, add, 
                 paginationComponentOptions={paginationComponentOptions}
                 paginationRowsPerPageOptions={[5, 10, 20, 30, 40]}
                 noDataComponent={<h4 className="p-4">No hay información disponible</h4>}
-                onRowClicked={(row) => handleEdit(row)}
+                onRowClicked={(row) => history.push(`/${url}/${row?.id}`)}
                 striped
             />
             <Modal show={showModal} closeModal={() => setShowModal(false)}>
