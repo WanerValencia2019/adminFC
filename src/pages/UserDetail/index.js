@@ -61,9 +61,9 @@ export default function UserDetail() {
     return (
         <DashBoard>
             <WelcomeBanner>
-                <h1 className="text-2xl md:text-3xl text-gray-800 font-bold mb-1">
+                <h4 className="text-xl md:text-xl text-gray-800 font-bold mb-1">
                     Usuario - {data ? data.name : 'Nuevo'}
-                </h1>
+                </h4>
             </WelcomeBanner>
             <div className="grid grid-cols-6 flex flex-row shadow overflow-hidden bg-white p-3">
                 <div className="col-span-2 lg:col-span-1 ">
