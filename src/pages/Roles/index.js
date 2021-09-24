@@ -85,6 +85,7 @@ function Roles() {
                 />
             </div>
             <DataCRUD
+                url="users-roles"
                 title="Roles"
                 data={searchData}
                 columns={columnsModel}

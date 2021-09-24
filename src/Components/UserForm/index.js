@@ -3,8 +3,24 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon, ArrowLeftIcon } from '@heroicons/react/solid';
+import { PlusIcon } from '@heroicons/react/outline';
+import { useSelector } from 'react-redux';
+
+import CreateRoleForModal from '../RoleForm/createRoleForModal';
+import Modal from '../Modal';
+import { roles as listRoles } from '../../redux/selectors';
 
 export default function UserForm({ data, register }) {
+    const { roles } = useSelector(listRoles);
+    const [showModal, setShowModal] = useState(false);
+
+    const [selectedForm, setSelectedForm] = useState(null);
+
+    const showCreateRoles = () => {
+        setSelectedForm(<CreateRoleForModal setShow={setShowModal} />);
+        setShowModal(true);
+    };
+
     return (
         <div className="shadow overflow-hidden sm:rounded-md">
             <div className="grid grid-cols-6 shadow overflow-hidden bg-white p-3">
@@ -282,19 +298,26 @@ export default function UserForm({ data, register }) {
                                                 >
                                                     Roles
                                                 </label>
-                                                <select
-                                                    id="roles"
-                                                    name="roles"
-                                                    autoComplete="roles"
-                                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                                    defaultValue={data?.roles}
-                                                    {...register('roles')}
-                                                >
-                                                    <option value="Cliente">Cliente</option>
-                                                    <option value="Administrador">
-                                                        Administrador
-                                                    </option>
-                                                </select>
+                                                <div className="flex flex-row items-center">
+                                                    <select
+                                                        id="roles"
+                                                        name="roles"
+                                                        autoComplete="roles"
+                                                        className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                        defaultValue={data?.roles}
+                                                        {...register('roles')}
+                                                    >
+                                                        {roles.map((rol) => (
+                                                            <option value={rol.id}>
+                                                                {rol.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                    <PlusIcon
+                                                        onClick={showCreateRoles}
+                                                        className="ml-1 w-6 h-6 text-green-600 cursor-pointer"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </Disclosure.Panel>
@@ -304,6 +327,9 @@ export default function UserForm({ data, register }) {
                     </div>
                 </div>
             </div>
+            <Modal show={showModal} closeModal={() => setShowModal(false)}>
+                {selectedForm}
+            </Modal>
         </div>
     );
 }

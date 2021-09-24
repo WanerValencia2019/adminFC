@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import Users from './pages/Users';
 import UserDetail from './pages/UserDetail';
 import Roles from './pages/Roles';
+import RoleDetail from './pages/RoleDetail';
 import Interests from './pages/Interests';
 import Services from './pages/Services';
 import StateServices from './pages/StateServices';
@@ -45,6 +46,9 @@ function App() {
                 </Route>
                 <Route exact path="/users-roles">
                     <Roles />
+                </Route>
+                <Route exact path="/users-roles/:id">
+                    <RoleDetail />
                 </Route>
                 <Route exact path="/interests">
                     <Interests />
