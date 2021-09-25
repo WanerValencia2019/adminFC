@@ -84,6 +84,7 @@ export default function Interest() {
                 />
             </div>
             <DataCRUD
+                url="interests"
                 title="Intereses"
                 data={searchData}
                 columns={columnsModel}

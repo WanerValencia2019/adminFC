@@ -72,6 +72,7 @@ function Services() {
                 />
             </div>
             <DataCRUD
+                url="services"
                 title="Servicios"
                 data={searchData}
                 columns={columnsModel}

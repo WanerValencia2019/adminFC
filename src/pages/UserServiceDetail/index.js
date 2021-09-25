@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable  react/no-unescaped-entities */
 import React, { useState, useLayoutEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -11,23 +9,23 @@ import { ChevronUpIcon, ArrowLeftIcon } from '@heroicons/react/solid';
 
 import DashBoard from '../../Components/DashBoard';
 import WelcomeBanner from '../../Components/WelcomeBanner/index';
+import UserServicesForm from '../../Components/UserServicesForm';
 
-import UserForm from '../../Components/UserForm';
+import { userServices } from '../../redux/selectors';
 
-import { listUsers } from '../../redux/selectors';
-import { addUser, updateUser, deleteUser } from '../../redux/Users/users.actions';
+import {
+    addUserServices,
+    updateUserServices,
+    deleteUserServices,
+} from '../../redux/UserServices/userServices.actions';
 
-export default function UserDetail() {
+export default function UserServiceDetail() {
     const params = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
 
     const [data, setData] = useState(null);
-    const { users } = useSelector(listUsers);
-
-    useLayoutEffect(() => {
-        setData(users.filter((user) => user.id === Number(params?.id))[0]);
-    }, []);
+    const { services } = useSelector(userServices);
 
     const {
         register,
@@ -35,53 +33,73 @@ export default function UserDetail() {
         handleSubmit,
     } = useForm();
 
+    useLayoutEffect(() => {
+        setData(services.filter((service) => service.id === Number(params?.id))[0]);
+    }, [data]);
+
     const create = (values) => {
-        const { username, email, name, lastName, description } = values;
-        console.log(values);
-        const id = data?.id || 0;
-        dispatch(addUser({ id, username, name, lastName, email, description }));
-        history.push('/users');
+        const { userId, stateServiceId, servicesId, value, description, dateService } = values;
+        dispatch(
+            addUserServices({
+                id: 0,
+                userId,
+                stateServiceId,
+                servicesId,
+                value,
+                description,
+                dateService,
+            }),
+        );
+        history.push('/services-users');
     };
 
     const edit = (values) => {
-        const { username, email, name, lastName, description } = values;
-        console.log(values);
-        const id = data?.id;
-        dispatch(updateUser({ id, username, name, lastName, email, description }));
-        history.push('/users');
+        const { userId, stateServiceId, servicesId, value, description, dateService } = values;
+        dispatch(
+            updateUserServices({
+                id: 0,
+                userId,
+                stateServiceId,
+                servicesId,
+                value,
+                description,
+                dateService,
+            }),
+        );
+        history.push('/services-users');
     };
 
     const remove = () => {
         const id = data?.id;
-        dispatch(deleteUser(id));
-        history.push('/users');
+        dispatch(deleteUserServices(id));
+        history.push('/services-users');
     };
+
     return (
         <DashBoard>
             <WelcomeBanner>
                 <h4 className="text-xl md:text-xl text-gray-800 font-bold mb-1">
-                    Usuario - {data ? data.name : 'Nuevo'}
+                    Servicios de usuario - {data ? data.id : 'Nuevo'}
                 </h4>
             </WelcomeBanner>
             <div className="grid grid-cols-6 flex flex-row shadow overflow-hidden bg-white p-3">
                 <div className="col-span-2 lg:col-span-1 ">
                     <div className="flex flex-row items-center text-blue-500 cursor-pointer">
-                        <ArrowLeftIcon onClick={() => history.push('/users')} className="h-6 w-6" />
+                        <ArrowLeftIcon
+                            onClick={() => history.push('/services-users')}
+                            className="h-6 w-6"
+                        />
                     </div>
                 </div>
                 <br />
                 <div className="w-full  px-4 pt-3 col-span-6 sm:col-span-6">
                     <form onSubmit={data ? handleSubmit(edit) : handleSubmit(create)}>
                         <div className="grid grid-cols-6 flex flex-row">
-                            <div className="col-span-6 sm:col-span-5">
-                                <UserForm
-                                    data={data}
-                                    handleSubmit={handleSubmit}
-                                    register={register}
-                                />
+                            <div className="col-span-6  sm:col-span-5">
+                                <UserServicesForm data={data} register={register} errors={errors} />
                             </div>
                             <div className="col-span-6 sm:col-span-4 md:col-span-4 lg:col-span-1 mt-8 ">
-                                <div className=" flex flex-col bg-gray-50 text-right sm:px-6 px-6">
+                                <div className=" flex flex-col  text-right sm:px-6 px-6">
                                     {data ? (
                                         <>
                                             <button

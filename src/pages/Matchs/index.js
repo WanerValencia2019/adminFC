@@ -88,6 +88,7 @@ export default function Matchs() {
                 />
             </div>
             <DataCRUD
+                url="matchs"
                 title="Coincidencias"
                 data={searchData}
                 columns={columnsModel}

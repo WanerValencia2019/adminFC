@@ -1,33 +1,30 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable  react/no-unescaped-entities */
 import React, { useState, useLayoutEffect } from 'react';
-import { useForm } from 'react-hook-form';
 
+import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
-import { Disclosure } from '@headlessui/react';
-import { ChevronUpIcon, ArrowLeftIcon } from '@heroicons/react/solid';
+import { ArrowLeftIcon } from '@heroicons/react/solid';
 
 import DashBoard from '../../Components/DashBoard';
 import WelcomeBanner from '../../Components/WelcomeBanner/index';
+import InterestForm from '../../Components/InterestForm';
 
-import UserForm from '../../Components/UserForm';
+import {
+    addInterest,
+    updateInterest,
+    deleteInterest,
+} from '../../redux/Interests/interests.actions';
 
-import { listUsers } from '../../redux/selectors';
-import { addUser, updateUser, deleteUser } from '../../redux/Users/users.actions';
+import { interest as listInterests } from '../../redux/selectors';
 
-export default function UserDetail() {
+export default function InterestDetail() {
     const params = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
 
     const [data, setData] = useState(null);
-    const { users } = useSelector(listUsers);
-
-    useLayoutEffect(() => {
-        setData(users.filter((user) => user.id === Number(params?.id))[0]);
-    }, []);
+    const { interests } = useSelector(listInterests);
 
     const {
         register,
@@ -35,53 +32,61 @@ export default function UserDetail() {
         handleSubmit,
     } = useForm();
 
+    const showStatus = {
+        active: true,
+        inactive: false,
+    };
+
+    useLayoutEffect(() => {
+        setData(interests.filter((interest) => interest.id === Number(params?.id))[0]);
+    }, [data]);
+
     const create = (values) => {
-        const { username, email, name, lastName, description } = values;
-        console.log(values);
-        const id = data?.id || 0;
-        dispatch(addUser({ id, username, name, lastName, email, description }));
-        history.push('/users');
+        const { name, description, status } = values;
+        const st = showStatus[status];
+        dispatch(addInterest({ id: 0, name, description, status: st }));
+        history.push('/interests');
     };
 
     const edit = (values) => {
-        const { username, email, name, lastName, description } = values;
-        console.log(values);
+        const { name, description, status } = values;
+        const st = showStatus[status];
         const id = data?.id;
-        dispatch(updateUser({ id, username, name, lastName, email, description }));
-        history.push('/users');
+        dispatch(updateInterest({ id, name, description, status: st }));
+        history.push('/interests');
     };
 
     const remove = () => {
         const id = data?.id;
-        dispatch(deleteUser(id));
-        history.push('/users');
+        dispatch(deleteInterest(id));
+        history.push('/interests');
     };
+
     return (
         <DashBoard>
             <WelcomeBanner>
                 <h4 className="text-xl md:text-xl text-gray-800 font-bold mb-1">
-                    Usuario - {data ? data.name : 'Nuevo'}
+                    Interes - {data ? data.name : 'Nuevo'}
                 </h4>
             </WelcomeBanner>
             <div className="grid grid-cols-6 flex flex-row shadow overflow-hidden bg-white p-3">
                 <div className="col-span-2 lg:col-span-1 ">
                     <div className="flex flex-row items-center text-blue-500 cursor-pointer">
-                        <ArrowLeftIcon onClick={() => history.push('/users')} className="h-6 w-6" />
+                        <ArrowLeftIcon
+                            onClick={() => history.push('/interests')}
+                            className="h-6 w-6"
+                        />
                     </div>
                 </div>
                 <br />
                 <div className="w-full  px-4 pt-3 col-span-6 sm:col-span-6">
                     <form onSubmit={data ? handleSubmit(edit) : handleSubmit(create)}>
                         <div className="grid grid-cols-6 flex flex-row">
-                            <div className="col-span-6 sm:col-span-5">
-                                <UserForm
-                                    data={data}
-                                    handleSubmit={handleSubmit}
-                                    register={register}
-                                />
+                            <div className="col-span-6  sm:col-span-5">
+                                <InterestForm data={data} register={register} errors={errors} />
                             </div>
                             <div className="col-span-6 sm:col-span-4 md:col-span-4 lg:col-span-1 mt-8 ">
-                                <div className=" flex flex-col bg-gray-50 text-right sm:px-6 px-6">
+                                <div className=" flex flex-col  text-right sm:px-6 px-6">
                                     {data ? (
                                         <>
                                             <button

@@ -73,6 +73,7 @@ function StateServices() {
                 />
             </div>
             <DataCRUD
+                url="services-states"
                 title="Estados del servicio"
                 data={searchData}
                 columns={columnsModel}

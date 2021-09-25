@@ -11,11 +11,15 @@ import { ChevronUpIcon, ArrowLeftIcon } from '@heroicons/react/solid';
 
 import DashBoard from '../../Components/DashBoard';
 import WelcomeBanner from '../../Components/WelcomeBanner/index';
+import TransactionForm from '../../Components/TransactionForm';
 
-import UserForm from '../../Components/UserForm';
+import { transactions as listTransactions } from '../../redux/selectors';
 
-import { listUsers } from '../../redux/selectors';
-import { addUser, updateUser, deleteUser } from '../../redux/Users/users.actions';
+import {
+    addTransaction,
+    updateTransaction,
+    deleteTransaction,
+} from '../../redux/Transactions/transactions.actions';
 
 export default function UserDetail() {
     const params = useParams();
@@ -23,10 +27,10 @@ export default function UserDetail() {
     const dispatch = useDispatch();
 
     const [data, setData] = useState(null);
-    const { users } = useSelector(listUsers);
+    const { transactions } = useSelector(listTransactions);
 
     useLayoutEffect(() => {
-        setData(users.filter((user) => user.id === Number(params?.id))[0]);
+        setData(transactions.filter((transaction) => transaction.id === Number(params?.id))[0]);
     }, []);
 
     const {
@@ -36,37 +40,61 @@ export default function UserDetail() {
     } = useForm();
 
     const create = (values) => {
-        const { username, email, name, lastName, description } = values;
-        console.log(values);
-        const id = data?.id || 0;
-        dispatch(addUser({ id, username, name, lastName, email, description }));
-        history.push('/users');
+        const { userId, serviceId, paymentTypeId, payInfo, status, total, paymentAt } = values;
+        const formatTotal = Number(total);
+        dispatch(
+            addTransaction({
+                id: 0,
+                userId,
+                serviceId,
+                paymentTypeId,
+                payInfo,
+                status,
+                total: formatTotal,
+                paymentAt,
+            }),
+        );
+        history.push('/transactions');
     };
 
     const edit = (values) => {
-        const { username, email, name, lastName, description } = values;
-        console.log(values);
+        const { userId, serviceId, paymentTypeId, payInfo, status, total, paymentAt } = values;
+        const formatTotal = Number(total);
         const id = data?.id;
-        dispatch(updateUser({ id, username, name, lastName, email, description }));
-        history.push('/users');
+        dispatch(
+            updateTransaction({
+                id,
+                userId,
+                serviceId,
+                paymentTypeId,
+                payInfo,
+                status,
+                total: formatTotal,
+                paymentAt,
+            }),
+        );
+        history.push('/transactions');
     };
 
     const remove = () => {
         const id = data?.id;
-        dispatch(deleteUser(id));
-        history.push('/users');
+        dispatch(deleteTransaction(id));
+        history.push('/transactions');
     };
     return (
         <DashBoard>
             <WelcomeBanner>
                 <h4 className="text-xl md:text-xl text-gray-800 font-bold mb-1">
-                    Usuario - {data ? data.name : 'Nuevo'}
+                    Transacción - {data ? data.id : 'Nuevo'}
                 </h4>
             </WelcomeBanner>
             <div className="grid grid-cols-6 flex flex-row shadow overflow-hidden bg-white p-3">
                 <div className="col-span-2 lg:col-span-1 ">
                     <div className="flex flex-row items-center text-blue-500 cursor-pointer">
-                        <ArrowLeftIcon onClick={() => history.push('/users')} className="h-6 w-6" />
+                        <ArrowLeftIcon
+                            onClick={() => history.push('/transactions')}
+                            className="h-6 w-6"
+                        />
                     </div>
                 </div>
                 <br />
@@ -74,7 +102,7 @@ export default function UserDetail() {
                     <form onSubmit={data ? handleSubmit(edit) : handleSubmit(create)}>
                         <div className="grid grid-cols-6 flex flex-row">
                             <div className="col-span-6 sm:col-span-5">
-                                <UserForm
+                                <TransactionForm
                                     data={data}
                                     handleSubmit={handleSubmit}
                                     register={register}

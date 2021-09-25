@@ -126,7 +126,7 @@ function UserServices() {
                 />
             </div>
             <DataCRUD
-                url="users"
+                url="services-users"
                 title="Servicios de usuarios"
                 data={searchData}
                 columns={columnsModel}

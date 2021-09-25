@@ -50,7 +50,6 @@ export const updateTransaction =
         const { transactions } = prevState().transactions;
 
         transactions[index] = { ...transactions[index], ...newData };
-        console.log(transactions);
         return dispatch({
             type: ActionTypes.UPDATE_TRANSACTION_SUCCESS,
             payload: {

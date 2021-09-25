@@ -85,6 +85,7 @@ export default function PaymentTypes() {
                 />
             </div>
             <DataCRUD
+                url="paymentTypes"
                 title="Metódos de pago"
                 data={searchData}
                 columns={columnsModel}

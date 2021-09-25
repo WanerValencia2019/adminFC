@@ -128,6 +128,7 @@ function UserServices() {
                 />
             </div>
             <DataCRUD
+                url="transactions"
                 title="Transacciones"
                 data={searchData}
                 columns={columnsModel}
